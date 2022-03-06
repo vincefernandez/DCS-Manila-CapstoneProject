@@ -6,6 +6,8 @@ if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 }
 
+
+
 function showForms() {
     let Forms = document.getElementById("CreateAccounts");
     let AllAccounts = document.getElementById("AllAccountsTable");

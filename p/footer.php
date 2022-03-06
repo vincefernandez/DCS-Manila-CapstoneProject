@@ -1,11 +1,11 @@
-<footer class="main-footer fixed-bottom">
-    <!-- To the right -->
+<!-- <footer class="main-footer fixed-bottom mt-10">
+
     <div class="float-right d-none d-sm-inline">
         Anything you want
     </div>
-    <!-- Default to the left -->
+
     <strong>Copyright &copy; 2014-2021 <a href="#">Cerberus</a>.</strong> All rights reserved.
-</footer>
+</footer> -->
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->

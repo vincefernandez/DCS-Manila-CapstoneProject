@@ -3,6 +3,8 @@ include_once('../app/class.php');
 include_once('AdminHeader.php');
 session_start();
 $Employee_ID = $_SESSION['login'];
+$ID = $_GET['Edit'];
+print_r($ID);
 $student->UpdateAccounts();
 ?>
 
@@ -74,7 +76,7 @@ $student->UpdateAccounts();
                                             <div class="card-body">
                                                 <div class="card">
                                                     <div class="row">
-
+                                                    <input type="hidden" class="form-control" name="ID" value="<?php echo "$ID"; ?>">
 
                                                         <div class="col-4">
                                                             <div class="form-group">

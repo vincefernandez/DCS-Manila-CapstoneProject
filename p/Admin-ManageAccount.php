@@ -224,7 +224,8 @@ $student->delAccounts();
                                                     <div class="form-group">
                                                         <label>User Permission</label>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=" Administrative Issuance" id="flexCheckChecked" name="AdministrativeIssuance" checked>
+                                                            <input class="form-check-input" type="checkbox" value="Administrative Issuance" id="flexCheckChecked" name="AdministrativeIssuance" checked>
+
                                                             <label class="form-check-label" for="flexCheckChecked">
                                                                 Administrative Issuance
                                                             </label>
@@ -294,11 +295,12 @@ $student->delAccounts();
                     <div class="row" id="AllAccountsTable" style="display: none;">
                         <div class="col-12">
 
-                            <form action="Admin-ManageAccount.php" method="get">
-                                <div class="table-responsive">
+                            <form action="Admin-ManageAccount.php" method="post">
+                                <div class="table-scrollable">
                                     <table id="myTable" class="table-responsive">
                                         <thead>
                                             <tr>
+                                                <!-- <th>#</th> -->
                                                 <th>First Name</th>
                                                 <th>Middle Name</th>
                                                 <th>Last Name</th>
@@ -313,9 +315,9 @@ $student->delAccounts();
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <?php $student->get_employee(); ?>
-                                            </tr>
+
+                                            <?php $student->get_employee(); ?>
+
 
                                         </tbody>
                                     </table>
@@ -338,7 +340,8 @@ $student->delAccounts();
 
 
         </div>
-        <!-- Main Footer -->
-        <?php
+    </div>
+    <!-- Main Footer -->
+    <?php
 
-        include_once('footer.php'); ?>
+    include_once('footer.php'); ?>

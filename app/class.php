@@ -162,9 +162,16 @@ class myStudent
     {
 
         $connection = $this->OpenConnection();
-        $getUsers = $connection->prepare("SELECT * FROM users_tbl ORDER BY Employee_ID ASC");
+        $getUsers = $connection->prepare("SELECT * FROM users_tbl ORDER BY Employee_ID limit 9999999  offset 1");
         $getUsers->execute();
         $users = $getUsers->fetchAll();
+
+        $nRows = $connection->query('select count(*) from users_tbl')->fetchColumn();
+        if ($nRows < 1) {
+            echo "<td>No Data</td>";
+        }
+
+
 
 
         foreach ($users as $user) {
@@ -208,8 +215,12 @@ class myStudent
     public function UpdateAccounts()
     {
         $connection = $this->OpenConnection();
+
         if (isset($_POST['UpdateAccounts'])) {
-            $Account_ID = $_SESSION['login'];
+
+
+
+            $Employee_ID = $_POST['ID'];
             $First_Name = $_POST['First_Name'];
             $Last_Name = $_POST['Last_Name'];
             $Suffix = $_POST['Suffix'];
@@ -224,14 +235,14 @@ class myStudent
             // $RRM = $_POST['RRM'];
             // $Files201 = $_POST['201Files'];
             // $sql = "UPDATE users_tbl SET First_Name=?, Last_Name=?, Middle_Name=?, Suffix=?, Position=?, Section=?, ContactNumber=?, Email=?, Password=? WHERE Account_ID='$Account_ID'";
-             // $stmt = $connection->prepare($sql);
+            // $stmt = $connection->prepare($sql);
             // $stmt->execute([$First_Name, $Last_Name, $Middle_Name, $Suffix,$Position,$Section,$ContactNUmber,$Email,$Password]);
 
             $sql = "UPDATE users_tbl SET First_Name=:First_Name, Last_Name=:Last_Name, Middle_Name=:Middle_Name, Suffix=:Suffix, Position=:Position, Section=:Section, ContactNumber=:ContactNumber,
-            Email=:Email, Password=:Password WHERE Account_ID=:id";
+            Email=:Email, Password=:Password WHERE Employee_ID=:id";
             $statement = $connection->prepare($sql);
 
-            $statement->bindParam(':id',$Account_ID);
+            $statement->bindParam(':id', $Employee_ID);
             $statement->bindParam(':First_Name', $First_Name);
             $statement->bindParam(':Last_Name', $Last_Name);
             $statement->bindParam(':Middle_Name', $Middle_Name);
@@ -241,12 +252,22 @@ class myStudent
             $statement->bindParam(':ContactNumber', $ContactNUmber);
             $statement->bindParam(':Email', $Email);
             $statement->bindParam(':Password', $Password);
-            if($statement->execute()) {
-        header('location: ../p/admin-manageAccount.php');
-}
-
+            if ($statement->execute()) {
+?>
+                <script type="text/javascript">
+                    alert("Edit Succesfully");
+                    window.location.href = "../p/admin-manageaccount.php";
+                </script>
+                }else{
+                ?>
+                <script>
+                    alert('Error');
+                </script>
+            <?php
+            }
         }
     }
+    // }
     public function getFullName()
     {
         $Account_ID = $_SESSION['login'];
@@ -266,7 +287,14 @@ class myStudent
             $DeleteAccounts = $_GET['Del'];
 
             $getUsers = $connection->prepare("Delete FROM users_tbl Where Employee_ID = $DeleteAccounts ");
-            $getUsers->execute();
+            if ($getUsers->execute()) {
+            ?>
+                <script type="text/javascript">
+                    alert("Delete Successfully");
+                    window.location.href = "../p/admin-manageaccount.php";
+                </script>
+<?php
+            }
         }
     }
     public function IssetGET()
@@ -660,6 +688,8 @@ class myStudent
         $connection = $this->OpenConnection();
 
         if (isset($_POST['AddAccountsSubmit'])) {
+
+
             // if (isset($_POST['AddAccountsSubmit'])) {
             $Account_ID = uniqid();
             $First_Name = $_POST['First_Name'];
@@ -671,10 +701,10 @@ class myStudent
             $Password = $_POST['Password'];
             $Middle_Name = $_POST['Middle_Name'];
             $Section = $_POST['Section'];
-            $AdministrativeIssuance = $_POST['AdministrativeIssuance'];
-            $Numerical = $_POST['Numerical'];
-            $RRM = $_POST['RRM'];
-            $Files201 = $_POST['201Files'];
+            $AdministrativeIssuance = isset($_POST['AdministrativeIssuance']) ? 'Yes' : 'No';
+            $Numerical = isset($_POST['Numerical']) ? 'Yes' : 'No';
+            $RRM = isset($_POST['RRM']) ? 'Yes' : 'No';
+            $Files201 = isset($_POST['201Files']) ? 'Yes' : 'No';
             $created_date = date("Y-m-d H:i:s");
 
             // THIS WILL GENERATE UNIQUE ID
