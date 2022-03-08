@@ -293,11 +293,11 @@ $student->delAccounts();
                     </div>
 
                     <div class="row" id="AllAccountsTable" style="display: none;">
-                        <div class="col-12">
+                        <div class="col-lg-12">
 
                             <form action="Admin-ManageAccount.php" method="post">
-                                <div class="table-scrollable">
-                                    <table id="myTable" class="table-responsive">
+                                <div class="table-responsive">
+                                    <table id="myTable" class="table table-bordered dt-responsive">
                                         <thead>
                                             <tr>
                                                 <!-- <th>#</th> -->
@@ -307,11 +307,16 @@ $student->delAccounts();
                                                 <th>Suffix</th>
                                                 <th>Position</th>
                                                 <th>Section</th>
-                                                <th>Email</th>
-                                                <th>Password</th>
+                                                <!-- <th>Email</th>
+                                                <th>Password</th> -->
+                                                <th>Numerical</th>
+                                                <th>Administrative Issuance</th>
+                                                <th>201Files</th>
+                                                <th>Numerical</th>
                                                 <th>Date Created</th>
                                                 <th>Delete</th>
                                                 <th>Edit</th>
+                                                <th>Info</th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -30,7 +30,7 @@ $student->UpdateAccounts();
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="../p/Admin-ManageAccount.php">Home</a></li>
                                 <li class="breadcrumb-item active">Manage Account</li>
                             </ol>
                         </div>
@@ -76,7 +76,7 @@ $student->UpdateAccounts();
                                             <div class="card-body">
                                                 <div class="card">
                                                     <div class="row">
-                                                    <input type="hidden" class="form-control" name="ID" value="<?php echo "$ID"; ?>">
+                                                        <input type="hidden" class="form-control" name="ID" value="<?php echo "$ID"; ?>">
 
                                                         <div class="col-4">
                                                             <div class="form-group">
@@ -164,28 +164,34 @@ $student->UpdateAccounts();
                                                         <div class="col-12">
 
                                                             <div class="form-group">
-                                                                <label>User Permission</label>
-                                                                <div class="input-group">
-                                                                    <div class="form-group form-check">
 
-                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                                                <div class="form-group">
+                                                                    <label>User Permission</label>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="Administrative Issuance" id="flexCheckChecked" name="AdministrativeIssuance" checked>
+
                                                                         <label class="form-check-label" for="flexCheckChecked">
-                                                                            Checked checkbox
-                                                                        </label> <br>
-                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                                        <label class="form-check-label" for="flexCheckChecked">
-                                                                            Checked checkbox
-                                                                        </label> <br>
-                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                                        <label class="form-check-label" for="flexCheckChecked">
-                                                                            Checked checkbox
-                                                                        </label> <br>
-                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                                        <label class="form-check-label" for="flexCheckChecked">
-                                                                            Checked checkbox
+                                                                            Administrative Issuance
                                                                         </label>
                                                                     </div>
-
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="Numerical" id="flexCheckChecked" name="Numerical" checked>
+                                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                                            Numerical
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="RRM" id="flexCheckChecked" name="RRM" checked>
+                                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                                            RRM
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="201 Files" id="flexCheckChecked" name="201Files" checked>
+                                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                                            201 Files
+                                                                        </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 

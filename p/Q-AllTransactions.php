@@ -42,26 +42,32 @@ $Employee_ID = $_SESSION['login'];
       <!-- Main content -->
       <section class="content">
 
+        <form action="Admin-ManageAccount.php" method="post">
+          <div class="table-responsive">
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Transaction_ID</th>
-              <th scope="col">Purpose</th>
-              <th scope="col">Date</th>
+            <table id="myTable" class="table table-bordered dt-responsive display nowrap" style="width: 100%;">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Transaction_ID</th>
+                  <th scope="col">Purpose</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
 
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <?php
-              $student->DisplayTransactions();
-              ?>
+                <?php
+                $student->DisplayTransactions();
+                ?>
 
-            </tr>
-          </tbody>
+
+              </tbody>
+            </table>
+
+          </div>
+        </form>
+
         </table>
 
 

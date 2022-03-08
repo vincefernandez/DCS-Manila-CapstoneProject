@@ -160,7 +160,7 @@ class myStudent
     }
     public function get_employee()
     {
-
+        //limit 9999999  offset 1
         $connection = $this->OpenConnection();
         $getUsers = $connection->prepare("SELECT * FROM users_tbl ORDER BY Employee_ID limit 9999999  offset 1");
         $getUsers->execute();
@@ -179,22 +179,26 @@ class myStudent
 
             // echo " <td>$user[Employee_ID]</td>";
             echo " <td>$user[First_Name]</td>";
-            echo " <td>$user[Last_Name]</td>";
             echo " <td>$user[Middle_Name]</td>";
+            echo " <td>$user[Last_Name]</td>";
+
             echo " <td>$user[Suffix]</td>";
 
             echo " <td>$user[Position]</td>";
             echo " <td>$user[Section]</td>";
-            echo " <td>$user[Email]</td>";
+            // echo " <td>$user[Email]</td>";
+            echo " <td>$user[RRM]</td>";
+            echo " <td>$user[AdministrativeIssuance]</td>";
+            echo "<td>$user[Files201]</td>";
+            echo "<td>$user[Numerical]</td>";
 
-
-            echo " <td>$user[Password]</td>";
+            // echo " <td>$user[Password]</td>";
             echo " <td>$user[Date]</td>";
 
 
             echo " <td><a href='Admin-ManageAccount.php?Del=$user[Employee_ID]' class='btn btn-info d-inline-block'>Delete'</a></td>";
             echo "<td><a href='edit.php?Edit=$user[Employee_ID]' class='btn btn-info'>Edit</a></td>";
-
+            echo "<td><a href='#INFO_DETAILS_OF_EMPLOYEE' class='btn btn-info'>Info</a></td>";
 
             echo "</tr>";
             // echo " <td><button type='button'  class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@getbootstrap'>A</button></td>";
@@ -230,6 +234,10 @@ class myStudent
             $Password = $_POST['Password'];
             $Middle_Name = $_POST['Middle_Name'];
             $Section = $_POST['Section'];
+            $AdministrativeIssuance = isset($_POST['AdministrativeIssuance']) ? 'Yes' : 'No';
+            $Numerical = isset($_POST['Numerical']) ? 'Yes' : 'No';
+            $RRM = isset($_POST['RRM']) ? 'Yes' : 'No';
+            $Files201 = isset($_POST['201Files']) ? 'Yes' : 'No';
             // $AdministrativeIssuance = $_POST['AdministrativeIssuance'];
             // $Numerical = $_POST['Numerical'];
             // $RRM = $_POST['RRM'];
@@ -239,7 +247,7 @@ class myStudent
             // $stmt->execute([$First_Name, $Last_Name, $Middle_Name, $Suffix,$Position,$Section,$ContactNUmber,$Email,$Password]);
 
             $sql = "UPDATE users_tbl SET First_Name=:First_Name, Last_Name=:Last_Name, Middle_Name=:Middle_Name, Suffix=:Suffix, Position=:Position, Section=:Section, ContactNumber=:ContactNumber,
-            Email=:Email, Password=:Password WHERE Employee_ID=:id";
+            Email=:Email, Password=:Password, RRM=:RRM, Files201=:Files201, AdministrativeIssuance=:AdministrativeIssuance, Numerical=:Numerical WHERE Employee_ID=:id";
             $statement = $connection->prepare($sql);
 
             $statement->bindParam(':id', $Employee_ID);
@@ -252,6 +260,10 @@ class myStudent
             $statement->bindParam(':ContactNumber', $ContactNUmber);
             $statement->bindParam(':Email', $Email);
             $statement->bindParam(':Password', $Password);
+            $statement->bindParam(':RRM', $RRM);
+            $statement->bindParam(':Files201', $Files201);
+            $statement->bindParam(':AdministrativeIssuance', $AdministrativeIssuance);
+            $statement->bindParam(':Numerical', $Numerical);
             if ($statement->execute()) {
 ?>
                 <script type="text/javascript">
@@ -293,7 +305,7 @@ class myStudent
                     alert("Delete Successfully");
                     window.location.href = "../p/admin-manageaccount.php";
                 </script>
-<?php
+            <?php
             }
         }
     }
@@ -471,6 +483,7 @@ class myStudent
 
     public function AddDatabaseToQueeing()
     {
+
         if (isset($_POST['Submit'])) {
 
 
@@ -492,13 +505,9 @@ class myStudent
             <strong>Congrats $Name!</strong> You got queeing ticket number $ID.
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
           </div>";
-        } else {
-            echo "<div class='alert alert-warning alert-dismissible fade show text-center' role='alert'>
-
-            <strong>Err!</strong> Please Enter details
-            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-          </div>";
         }
+
+
     }
 
     public function DisplayQueeingUser()
@@ -708,7 +717,7 @@ class myStudent
             $created_date = date("Y-m-d H:i:s");
 
             // THIS WILL GENERATE UNIQUE ID
-            $sql = "INSERT INTO  users_tbl  (Account_ID,First_Name,Last_Name,Middle_Name,Suffix,Position,Section,ContactNumber,Email,Password,AdministrativeIssuance,Numerical,RRM,201Files,Date)
+            $sql = "INSERT INTO  users_tbl  (Account_ID,First_Name,Last_Name,Middle_Name,Suffix,Position,Section,ContactNumber,Email,Password,AdministrativeIssuance,Numerical,RRM,Files201,Date)
         VALUES ('$Account_ID','$First_Name','$Last_Name','$Middle_Name','$Suffix','$Position','$Section','$ContactNUmber','$Email','$Password','$AdministrativeIssuance','$Numerical','$RRM','$Files201','$created_date')";
             $connection->exec($sql);
             echo "<div class='alert alert-success' role='alert'>
