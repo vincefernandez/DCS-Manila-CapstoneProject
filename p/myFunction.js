@@ -38,3 +38,10 @@ function showTables() {
         Forms.style.display = "none";
     }
 }
+
+function listofQuotes() {
+    const Quotes = new Array['Hello', 'world', 'Nice', 'beautiful'];
+
+    let QuotesText = Quotes[2];
+    console.log(QuotesText.toString());
+}

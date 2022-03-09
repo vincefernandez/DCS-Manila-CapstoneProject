@@ -7,6 +7,7 @@ $student->FileUpload();
 $student->SessionValidation();
 $student->UpdateAccounts();
 $student->DisplayToSelect();
+$student->Fileupload();
 
 // $student->AddDatabaseToQueeing(); ?>
 ?>

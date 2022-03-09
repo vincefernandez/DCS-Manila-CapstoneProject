@@ -305,7 +305,7 @@ class myStudent
                     alert("Delete Successfully");
                     window.location.href = "../p/admin-manageaccount.php";
                 </script>
-            <?php
+<?php
             }
         }
     }
@@ -506,10 +506,44 @@ class myStudent
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
           </div>";
         }
+    }
+    public function DisplayWaitingQue()
+    {
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl Limit 1 offset 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
 
 
+        foreach ($users as $user) {
+            echo "<h3 class='text-center'>$user[Name]</h3>";
+            echo "<p class='card-text text-center'>Ticket Number : $user[Ticket_Number] </p>";
+        }
+
+        if (empty($users)) {
+            echo "No waiting List <br>";
+        }
     }
 
+    public function DisplayNowserving()
+    {
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl Limit 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+
+
+        foreach ($users as $user) {
+            echo "<h3 class='text-center'>$user[Name]</h3>";
+            echo "<p class='card-text'>Ticket Number : $user[Ticket_Number] </p>";
+        }
+
+        if (empty($users)) {
+            echo "No waiting List <br>";
+        }
+    }
     public function DisplayQueeingUser()
     {
         $connection = $this->OpenConnection();
@@ -538,7 +572,7 @@ class myStudent
 
         $count = $stmt->rowCount();
 
-        print($count);
+        echo "There are $count Client on the waiting List";
     }
     public function DisplayTransactions()
     {
@@ -796,12 +830,13 @@ class myStudent
     {
         $connection = $this->OpenConnection();
 
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['Fileupload'])) {
 
             // Count total files
             $countfiles = count($_FILES['files']['name']);
 
             // Prepared statement
+
             $query = "INSERT INTO images (name,image) VALUES(?,?)";
 
             $statement = $connection->prepare($query);
@@ -847,6 +882,73 @@ class myStudent
         }
     }
 
+    public function Fileupload1()
+    {
+        $Account_ID = $_SESSION['login'];
+        $connection = $this->OpenConnection();
+
+        if (isset($_POST['Fileupload'])) {
+
+            // Count total files
+            $countfiles = count($_FILES['files']['name']);
+
+
+            // Loop all files
+            for ($i = 0; $i < $countfiles; $i++) {
+
+                // File name
+                $filename = $_FILES['files']['name'][$i];
+
+                // Location
+                $target_file = '../upload/' . $filename;
+
+                // file extension
+                $file_extension = pathinfo(
+                    $target_file,
+                    PATHINFO_EXTENSION
+                );
+
+                $file_extension = strtolower($file_extension);
+
+                // Valid image extension
+                $valid_extension = array("png", "jpeg", "jpg");
+
+                if (in_array($file_extension, $valid_extension)) {
+
+                    // Upload file
+                    if (move_uploaded_file(
+                        $_FILES['files']['tmp_name'][$i],
+                        $target_file
+                    )) {
+
+                        $sql = 'UPDATE users_tbl
+        SET images = :images
+        WHERE Account_ID = :Account_ID';
+
+                        // prepare statement
+                        $statement = $connection->prepare($sql);
+
+                        // bind params
+                        $statement->bindParam(':Account_ID', $Account_ID, PDO::PARAM_INT);
+                        $statement->bindParam(':images', $target_file);
+
+                        // execute the UPDATE statment
+                        if ($statement->execute()) {
+                            echo 'The publisher has been updated successfully!';
+                        }else{
+                            echo "Error";
+                        }
+                    }
+                }
+            }
+
+            echo "File upload successfully";
+            header('location: ../p/profile.php');
+        }
+    }
+
+
+
     public function view()
     {
 
@@ -859,6 +961,25 @@ class myStudent
         foreach ($imagelist as $image) {
 
             echo $image['image'];
+        }
+    }
+    public function view1()
+    {
+        $Account_ID = $_SESSION['login'];
+        $connection = $this->OpenConnection();
+
+        $stmt = $connection->prepare("select images from users_tbl where Account_ID ='$Account_ID' limit 1 ");
+        $stmt->execute();
+        $imagelist = $stmt->fetchAll();
+
+        foreach ($imagelist as $image) {
+
+
+            echo "$image[images]";
+        }
+
+        if(empty($imagelist)){
+            echo "../dist/img/avatar.jpg";
         }
     }
 

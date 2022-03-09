@@ -3,6 +3,7 @@ include_once('../p/AdminHeader.php');
 include_once('../app/class.php');
 session_start();
 $Employee_ID = $_SESSION['login'];
+$student->Fileupload1();
 
 
 // print_r($Employee_ID);
@@ -76,12 +77,14 @@ $Employee_ID = $_SESSION['login'];
 									<div class="row">
 										<div class="col-md-4 mb-5">
 											<div class="profile-img">
-												<img src="../dist/img/avatar4.png" alt="User">
+												<div style="height: 50; width:auto;">
+													<img  class="img-fluid" src="<?php $student->view1() ?>">
+												</div>
 
 
+												<input type='file' name='files[]' multiple />
+												<input type='submit' value='Submit' name='Fileupload' />
 
-												<input type="file" name="fileToUpload" id="fileToUpload" hidden>
-												<input type="submit" value="Upload Image" name="submit">
 
 											</div>
 										</div>
@@ -92,7 +95,7 @@ $Employee_ID = $_SESSION['login'];
 											<?php $student->getFullName(); ?>
 										</h5>
 										<h6>
-											RRM
+											<?php echo "$user[Position]"?>
 										</h6>
 
 										<ul class="nav nav-tabs" id="myTab" role="tablist">
