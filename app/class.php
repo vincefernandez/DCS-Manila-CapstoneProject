@@ -1076,7 +1076,24 @@ class myStudent
         }
 
         if (empty($users)) {
-            echo "No Data <br>";
+            echo "<td text-center>No Data <br></td>";
+        }
+    }
+
+    public function NumericalDelete(){
+        $connection = $this->OpenConnection();
+
+        if (isset($_GET['NumericalDelete'])) {
+            $Delete = $_GET['NumericalDelete'];
+            $getUsers = $connection->prepare("Delete FROM numerical Where id=$Delete");
+            $getUsers->execute();
+           ?>
+           <script>
+               alert('Successfully');
+               $url = strtok($url, '?');
+
+           </script>
+<?php
         }
     }
 
