@@ -1,9 +1,11 @@
 <?php
-// include_once('../app/class.php');
+include_once('../app/class.php');
 include_once('AdminHeader.php');
 session_start();
-// $Account_ID = $_SESSION['login'];
-// $student->SessionValidation();
+$Account_ID = $_SESSION['login'];
+
+$student->NumericalAddRecords();
+// $student->N);
 // $student->AddAccounts();
 // $student->delAccounts();
 
@@ -145,7 +147,7 @@ session_start();
                                     <h3 class="card-title">Add Records</h3>
                                 </div>
 
-                                <form action="Admin-ManageAccount.php" method="POST">
+                                <form action="Numerical.php" method="POST" enctype='multipart/form-data'>>
                                     <div class="card-body">
                                         <div class="card">
                                             <div class="row">
@@ -166,8 +168,14 @@ session_start();
 
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="">Name</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Name">
+                                                    <label for="">First Name</label>
+                                                    <input type="text" class="form-control" name="First_Name" placeholder="Enter First Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Last Name</label>
+                                                    <input type="text" class="form-control" name="Last_Name" placeholder="Enter Last Name">
                                                 </div>
                                             </div>
 
@@ -175,44 +183,44 @@ session_start();
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="">Source</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter District">
+                                                    <input type="text" class="form-control" name="Source" placeholder="Enter Source">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="">Release number</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Academic">
+                                                    <input type="text" class="form-control" name="ReleaseNumber" placeholder="Enter ReleaseNumber">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="">Document type</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Source">
+                                                    <input type="text" class="form-control" name="DocumentType" placeholder="Enter DocumentType">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="">Classification number</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Year">
+                                                    <input type="text" class="form-control" name="ClassificationNumber" placeholder="Enter ClassificationNumber">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="">Document status</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Year">
+                                                    <input type="text" class="form-control" name="DocumentStatus" placeholder="Enter Document Status">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="">For release</label>
-                                                    <select class="form-control">
-                                                        <option>yes</option>
-                                                        <option>no</option>
+                                                    <label for="ForRelease">For</label>
+                                                    <select class="form-control" name="ForRelease">
+                                                        <option value="For_Release">For Release</option>
+                                                        <option value="For_Receive">For Receive</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -226,11 +234,11 @@ session_start();
 
                                             <div class="col-12">
 
-                                                <form action="#" method="POST" enctype="multipart/form-data">
-                                                    <input type="file" name="fileupload" value="fileupload" id="fileupload">
-                                                    <label for="fileupload"> Select a file to upload</label>
-                                                    <input type="submit" value="submit">
-                                                </form>
+
+                                                <input type="file" name="file" id="file" /></td>
+                                                <label for="fileupload"> Select a file to upload</label>
+
+
 
                                             </div>
 
@@ -239,14 +247,14 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary" name="AddAccountsSubmit">Submit</button>
+                                                <button type="submit" class="btn btn-primary" name="NumericalADD">Submit</button>
                                             </div>
                                         </div>
                                     </div>
 
 
 
-
+                                </form>
 
                             </div>
 
@@ -262,22 +270,25 @@ session_start();
                     <div class="col-12">
 
                         <form action="#" method="get">
-                            <div class="table-resposive">
-                                <table id="myTable" class="table table-responsive">
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-bordered dt-responsive">
                                     <thead>
                                         <tr>
-                                            <th>First Name</th>
-                                            <th>Middle Name</th>
-                                            <th>Last Name</th>
+                                            <th>Full Name</th>
+                                            <th>Source</th>
+                                            <th>Release Number</th>
+                                            <th>Document Type</th>
+                                            <th>Classification Number</th>
+                                            <th>Document Status</th>
+                                            <th>Purpose</th>
+                                            <th>File</th>
+                                            <th>Date</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
 
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>DONT MIND THIS</td>
-                                            <td>DONT MIND THIS</td>
-                                            <td>DONT MIND THIS</td>
-                                        </tr>
+                                    <tbody id="NumericalRecords">
 
                                     </tbody>
                                 </table>
@@ -301,6 +312,25 @@ session_start();
 
     </div>
     <!-- Main Footer -->
+    <script>
+        function NumericalRecords() {
+            setInterval(function() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("NumericalRecords").innerHTML = this.responseText;
+
+                    }
+                };
+                // xhttp.open("GET", "../app/Waitinglist.php", true);
+                xhttp.open("GET", "../app/NumericalRecords.php", true);
+                xhttp.send();
+            }, 1000);
+
+
+        }
+        NumericalRecords();
+    </script>
     <?php
 
     include_once('footer.php'); ?>

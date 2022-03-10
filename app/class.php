@@ -935,7 +935,7 @@ class myStudent
                         // execute the UPDATE statment
                         if ($statement->execute()) {
                             echo 'The publisher has been updated successfully!';
-                        }else{
+                        } else {
                             echo "Error";
                         }
                     }
@@ -949,20 +949,7 @@ class myStudent
 
 
 
-    public function view()
-    {
 
-        $connection = $this->OpenConnection();
-        // THERE SHOULD BE AN ID ASSOACIATED WITH THE ACCOUNT ID
-        $stmt = $connection->prepare('select * from images');
-        $stmt->execute();
-        $imagelist = $stmt->fetchAll();
-
-        foreach ($imagelist as $image) {
-
-            echo $image['image'];
-        }
-    }
     public function view1()
     {
         $Account_ID = $_SESSION['login'];
@@ -978,10 +965,128 @@ class myStudent
             echo "$image[images]";
         }
 
-        if(empty($imagelist)){
+        if (empty($imagelist)) {
             echo "../dist/img/avatar.jpg";
         }
     }
+
+    // public function NumericalAddRecords()
+    // {
+    //     $connection = $this->OpenConnection();
+    //     if (isset($_POST['NumericalADD'])) {
+
+
+    //         // if (isset($_POST['AddAccountsSubmit'])) {
+    //         $Transaction_ID = uniqid();
+    //         $First_Name = $_POST['First_Name'];
+    //         $Last_Name = $_POST['Last_Name'];
+    //         $Source = $_POST['Source'];
+    //         $ReleaseNumber = $_POST['ReleaseNumber'];
+    //         $DocumentType = $_POST['DocumentType'];
+    //         $ClassificationNumber = $_POST['ClassificationNumber'];
+    //         $DocumentStatus = $_POST['DocumentStatus'];
+    //         $ForRelease = $_POST['ForRelease'];
+
+    //         $created_date = date("Y-m-d");
+
+    //         // THIS WILL GENERATE UNIQUE ID
+    //         $sql = "INSERT INTO  numerical  (Transaction_ID,First_Name,Last_Name,Source,ReleaseNumber,DocumentType,ClassificationNumber,DocumentStatus,Purpose,File,Date)
+    //     VALUES ('$Transaction_ID','$First_Name','$Last_Name','$Source','$ReleaseNumber','$DocumentType','$ClassificationNumber','$DocumentStatus','$ForRelease','N/A','$created_date')";
+    //         $connection->exec($sql);
+    //         echo "<div class='alert alert-success' role='alert'>
+    //        A simple success alert—check it out!
+    //      </div>";
+    //     }
+    // }
+
+    public function NumericalAddRecords()
+    {
+        $connection = $this->OpenConnection();
+        if (isset($_POST['NumericalADD'])) {
+
+            $Transaction_ID = uniqid();
+            $First_Name = $_POST['First_Name'];
+            $Last_Name = $_POST['Last_Name'];
+            $Source = $_POST['Source'];
+            $ReleaseNumber = $_POST['ReleaseNumber'];
+            $DocumentType = $_POST['DocumentType'];
+            $ClassificationNumber = $_POST['ClassificationNumber'];
+            $DocumentStatus = $_POST['DocumentStatus'];
+            $ForRelease = $_POST['ForRelease'];
+
+            $created_date = date("Y-m-d");
+            $name = $_FILES['file']['name'];
+            $size = $_FILES['file']['size'];
+            $type = $_FILES['file']['type'];
+            $temp = $_FILES['file']['tmp_name'];
+            $fname = date("YmdHis") . '_' . $name;
+            $chk = $connection->query("SELECT * FROM  numerical where File = '$name' ")->rowCount();
+            if ($chk) {
+                $i = 1;
+                $c = 0;
+                while ($c == 0) {
+                    $i++;
+                    $reversedParts = explode('.', strrev($name), 2);
+                    $tname = (strrev($reversedParts[1])) . "_" . ($i) . '.' . (strrev($reversedParts[0]));
+                    $chk2 = $connection->query("SELECT * FROM  numerical where File = '$tname' ")->rowCount();
+                    if ($chk2 == 0) {
+                        $c = 1;
+                        $name = $tname;
+                    }
+                }
+            }
+            $move =  move_uploaded_file($temp, "../records/" . $fname);
+            if ($move) {
+                $sql = "INSERT INTO  numerical  (Transaction_ID,First_Name,Last_Name,Source,ReleaseNumber,DocumentType,ClassificationNumber,DocumentStatus,Purpose,File,Date)
+                VALUES ('$Transaction_ID','$First_Name','$Last_Name','$Source','$ReleaseNumber','$DocumentType','$ClassificationNumber','$DocumentStatus','$ForRelease','$name','$created_date')";
+                    $connection->exec($sql);
+                    echo "<div class='alert alert-success' role='alert'>
+                   A simple success alert—check it out!
+                 </div>";
+            }
+        }
+    }
+
+
+    public function DisplayNumericalRecords()
+    {
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM numerical");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+
+
+        foreach ($users as $user) {
+            echo "<tr>";
+            echo "<td>$user[First_Name] + $user[Last_Name]</td>";
+            echo "<td>$user[Source]</td>";
+            echo "<td>$user[ReleaseNumber]</td>";
+            echo "<td>$user[DocumentType]</td>";
+            echo "<td>$user[ClassificationNumber]</td>";
+            echo "<td>$user[DocumentStatus]</td>";
+            echo "<td>$user[Purpose]</td>";
+           echo "<td><a href='download1.php?filename=$user[File];'>$user[File]</a></td>";
+            // echo "<td><a href='download1.php?file_id=$user[id]' class='btn btn-info'>Downloads</td>";
+            echo "<td>$user[date]</td>";
+            echo "<td><a href='Numerical.php?NumericalEdit=$user[id]' class='btn btn-info'>Edit</td>";
+            echo "<td><a href='Numerical.php?NumericalDelete=$user[id]' class='btn btn-info'>Delete</td>";
+
+            echo "</tr>";
+        }
+
+        if (empty($users)) {
+            echo "No Data <br>";
+        }
+    }
+
+
+
+
+
+
+
+
 
 
 
