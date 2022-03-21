@@ -1,7 +1,7 @@
 <?php
     session_start();
-    $_SESSION['login'];
-    unset($_SESSION['login']);
+    $_SESSION['Account_Type'];
+    unset($_SESSION['Account_Type']);
 
     header("location: ../login");
     ?>

@@ -78,12 +78,12 @@ session_start();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Manage Appointment and Clearances</h1>
+                            <h1 class="m-0">Manage numerical</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="AdminAccount.php">Home</a></li>
-                                <li class="breadcrumb-item active">Manage Appointment and Clearances</li>
+                                <li class="breadcrumb-item active">Manage numerical</li>
                             </ol>
                         </div>
                     </div>
@@ -190,6 +190,13 @@ session_start();
                                                 <div class="form-group">
                                                     <label for="">Document type</label>
                                                     <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Source">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Classification number</label>
+                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Year">
                                                 </div>
                                             </div>
 

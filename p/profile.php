@@ -78,7 +78,7 @@ $student->Fileupload1();
 										<div class="col-md-4 mb-5">
 											<div class="profile-img">
 												<div style="height: 50; width:auto;">
-													<img  class="img-fluid" src="<?php $student->view1() ?>">
+													<img class="img-fluid" src="<?php $student->view1() ?>">
 												</div>
 
 
@@ -95,7 +95,7 @@ $student->Fileupload1();
 											<?php $student->getFullName(); ?>
 										</h5>
 										<h6>
-											<?php echo "$user[Position]"?>
+											<?php echo "$user[Position]" ?>
 										</h6>
 
 										<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -209,10 +209,10 @@ $student->Fileupload1();
 
 				<!-- Start creating your amazing application! -->
 				</div>
-
-				<div class="card-footer">
-					Footer
-				</div>
+			</section>
+			<div class="card-footer">
+				Footer
+			</div>
 
 		</div>
 

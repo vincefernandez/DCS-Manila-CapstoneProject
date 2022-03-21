@@ -21,15 +21,20 @@
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <!-- <script src="../dist/js/demo.js"></script> -->
+<script src="../dist/DataTables-1.11.4/css/dataTables.jqueryui.min.css"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script src="../dist/js/adminlte.min.js"></script>
 <script src="../p/myFunction.js"></script>
 <script>
-if ( window.history.replaceState ) {
-    window.history.replaceState( null, null, window.location.href );
-  }
-  </script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
 </body>
 
 </html>

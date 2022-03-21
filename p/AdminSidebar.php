@@ -21,7 +21,7 @@ $Account_ID = $_SESSION['login'];
         <img src="../dist/img/avatar.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="../p/profile.php" class="d-block"><?php $student->getFullName();?></a>
+        <a href="../p/profile.php" class="d-block">FIRST NAME LAST NAME</a>
       </div>
     </div>
 

@@ -4,7 +4,7 @@ include_once('AdminHeader.php');
 session_start();
 $Account_ID = $_SESSION['login'];
 
-$student->NumericalAddRecords();
+$student->AddFilesRecords();
 $student->NumericalDelete();
 // $student->N);
 // $student->AddAccounts();
@@ -148,7 +148,7 @@ $student->NumericalDelete();
                                     <h3 class="card-title">Add Records</h3>
                                 </div>
 
-                                <form action="Numerical.php" method="POST" enctype='multipart/form-data'>>
+                                <form action="Numerical.php" method="POST" enctype='multipart/form-data'>
                                     <div class="card-body">
                                         <div class="card">
                                             <div class="row">
@@ -211,8 +211,11 @@ $student->NumericalDelete();
 
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="">Document status</label>
-                                                    <input type="text" class="form-control" name="DocumentStatus" placeholder="Enter Document Status">
+                                                    <label for="ForRelease">DocumentStatus</label>
+                                                    <select class="form-control" name="DocumentStatus">
+                                                        <option value="Active">Active</option>
+                                                        <option value="Not_Active">Not Active</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -275,21 +278,59 @@ $student->NumericalDelete();
                                 <table id="myTable" class="table table-bordered dt-responsive">
                                     <thead>
                                         <tr>
+                                            <th>Control Number</th>
                                             <th>Full Name</th>
-                                            <th>Source</th>
-                                            <th>Release Number</th>
                                             <th>Document Type</th>
-                                            <th>Classification Number</th>
+                                            <!-- <th>Release Number</th>
+                                            <th>Source</th>
                                             <th>Document Status</th>
                                             <th>Purpose</th>
-                                            <th>File</th>
+                                            <th>Classification Number</th>
+                                            <th>District</th>
+                                            <th>Year</th>
+                                            <th>Grade Level</th>
+                                            <th>CAV ID</th>
+                                            <th>Date Administrative</th>
+                                            <th>Memorandum Number</th> -->
                                             <th>Date</th>
+                                            <th>File</th>
                                             <th>Edit</th>
-                                            <th>Delete</th>
+
 
                                         </tr>
                                     </thead>
-                                    <tbody id="NumericalRecords">
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+
 
                                     </tbody>
                                 </table>
@@ -312,31 +353,8 @@ $student->NumericalDelete();
 
 
     </div>
-    <!-- Main Footer -->
-    <script>
-        function NumericalRecords() {
-            setInterval(function() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("NumericalRecords").innerHTML = this.responseText;
-
-                    }
-                };
-                // xhttp.open("GET", "../app/Waitinglist.php", true);
-                xhttp.open("GET", "../app/NumericalRecords.php", true);
-                xhttp.send();
-            }, 1000);
 
 
-        }
-        NumericalRecords();
-
-
-        if (typeof window.history.pushState == 'function') {
-            window.history.pushState({}, "Hide", '<?php echo $_SERVER['PHP_SELF']; ?>');
-        }
-    </script>
     <?php
 
     include_once('footer.php'); ?>

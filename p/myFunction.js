@@ -1,12 +1,27 @@
-$(document).ready(function() {
-    $('#myTable').DataTable();
+// $(document).ready(function() {
+//     $('#myTable').DataTable();
 
-});
+// });
+// $(document).ready(function() {
+//     $('#example').DataTable({
+//         "scrollX": true
+//     });
+// });
 $(document).ready(function() {
-    $('#example').DataTable({
+    ('#myTable').DataTable({
+
+    })
+})
+$(document).ready(function() {
+    $('#myTable').DataTable({
+        "scrollY": 200,
         "scrollX": true
     });
 });
+// $('#myTable').DataTable({
+//     destroy: true,
+//     searching: false
+// });
 
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);

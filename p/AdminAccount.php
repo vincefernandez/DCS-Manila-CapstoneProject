@@ -4,7 +4,9 @@ include_once('AdminHeader.php');
 include_once('../app/class.php');
 session_start();
 $Account_ID = $_SESSION['login'];
-print_r($Account_ID);
+$Name = $_SESSION['FullName'];
+// print_r($Account_ID);
+// print_r($Name);
 
 ?>
 

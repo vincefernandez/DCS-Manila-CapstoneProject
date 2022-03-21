@@ -1,296 +1,406 @@
-<?php
-// include_once('../app/class.php');
-include_once('AdminHeader.php');
-session_start();
-// $Account_ID = $_SESSION['login'];
-// $student->SessionValidation();
-// $student->AddAccounts();
-// $student->delAccounts();
+<?php include_once('../app/class.php');
 
-// THIS WILL BE USE IN PROFILE SETTINGS ADD PICTURE
-
-// if (isset($_POST['submit'])) {
-
-//     // Count total files
-//     $countfiles = count($_FILES['files']['name']);
-
-//     // Prepared statement
-//     $query = "INSERT INTO images (name,image) VALUES(?,?)";
-
-//     $statement = $pdo->prepare($query);
-
-//     // Loop all files
-//     for ($i = 0; $i < $countfiles; $i++) {
-
-//         // File name
-//         $filename = $_FILES['files']['name'][$i];
-
-//         // Location
-//         $target_file = '../upload/' . $filename;
-
-//         // file extension
-//         $file_extension = pathinfo(
-//             $target_file,
-//             PATHINFO_EXTENSION
-//         );
-
-//         $file_extension = strtolower($file_extension);
-
-//         // Valid image extension
-//         $valid_extension = array("png", "jpeg", "jpg");
-
-//         if (in_array($file_extension, $valid_extension)) {
-
-//             // Upload file
-//             if (move_uploaded_file(
-//                 $_FILES['files']['tmp_name'][$i],
-//                 $target_file
-//             )) {
-
-//                 // Execute query
-//                 $statement->execute(
-//                     array($filename, $target_file)
-//                 );
-//             }
-//         }
-//     }
-
-//     echo "File upload successfully";
-// }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administrator</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+</head>
 
 
 <body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
     <div class="wrapper">
-
         <!-- Navbar -->
-        <?php include_once('navbar.php'); ?>
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="Administrator.php" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                        <form class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-comments"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle" />
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Brad Diesel
+                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">Call me whenever you can...</p>
+                                    <p class="text-sm text-muted">
+                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        John Pierce
+                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">I got your message bro</p>
+                                    <p class="text-sm text-muted">
+                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Nora Silvester
+                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">The subject goes here</p>
+                                    <p class="text-sm text-muted">
+                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                    </div>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">15</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> 4 new messages
+                            <span class="float-right text-muted text-sm">3 mins</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-users mr-2"></i> 8 friend requests
+                            <span class="float-right text-muted text-sm">12 hours</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> 3 new reports
+                            <span class="float-right text-muted text-sm">2 days</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php
-        include_once('AdminSidebar.php');
-        ?>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="../index3.html" class="brand-link">
+                <img src="../dist/img/dcslogo.png" alt="Record Services Manila" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
+                <h6 class="brand-text font-weight-light h6">
+                    Record Services Manila
+                </h6>
+            </a>
 
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">First Name Last Name</a>
+                    </div>
+                </div>
+
+                <!-- SidebarSearch Form -->
+                <!-- <div class="form-inline">
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                        <li class="nav-header">Dashboard</li>
+                        <li class="nav-item">
+                            <a href="Administrator.php" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Add Accounts
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Accounts List
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="../widgets.html" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Receiving, Routing And Mailing
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../widgets.html" class="nav-link ">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Administrative Issuance
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../widgets.html" class="nav-link active">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Certificate, Authentication and Verification
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../widgets.html" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Appointment and Clearance and 201 Files
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tree"></i>
+                                <p>
+                                    Numerical
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="../UI/general.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Communication</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../UI/icons.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Others</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="../widgets.html" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Manage Queuing
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
-            <div class="content-header">
+            <!-- Content Header (Page header) -->
+            <!-- <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Manage Certification, Authentication, and verification</h1>
-                        </div><!-- /.col -->
+                            <h1>Blank Page</h1>
+                        </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="AdminAccount.php">Home</a></li>
-                                <li class="breadcrumb-item active">Manage C.A.V</li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Blank Page</li>
                             </ol>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="content">
-                <div class="container-fluid w-new-style">
+            </section> -->
 
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table id="example" class="table table-bordered dt-responsive" style="width: 100%;">
+                                <thead>
+                                    <tr>
 
-                    <h5 class="mb-2 mt-4">title</h5>
-
-
-
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <!-- small card -->
-                            <div class="small-box bg-secondary">
-                                <!-- <div class="inner">
-                                    <h2>Add Records</h2>
-
-                                    <p>This will allow you to create an Account for the Employee</p>
-                                </div> -->
-                                <!-- <div class="icon">
-                                    <i class="fas fa-user"></i>
-                                </div> -->
-                                <button class="small-box-footer btn bg-success w-100 w-new-bg-success" onclick="showForms();">
-                                    Add Records <i class="fas fa-arrow-circle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <!-- small card -->
-                            <div class="small-box bg-secondary">
-                                <!-- <div class="inner">
-                                    <h2>Show All Records</h2>
-
-                                    <p>This will allow you to Show All created accounts for Employee</p>
-                                </div> -->
-                                <!-- <div class="icon">
-                                    <i class="fas fa-users"></i>
-                                </div> -->
-                                <button class="small-box-footer btn bg-primary w-100" onclick="showTables();">
-                                    All records <i class="fas fa-arrow-circle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- /.row -->
-                    </div>
-                    <div class="row" id="CreateAccounts" style="display: none;">
-                        <div class="col-12">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Add Records</h3>
-                                </div>
-
-                                <form action="Admin-ManageAccount.php" method="POST">
-                                    <div class="card-body">
-                                        <div class="card">
-                                            <div class="row">
+                                        <!-- <td>Employment No</td> -->
+                                        <td>Cav ID</td>
+                                        <td style="width: 500px;">
+                                            <p class='text-center'>Name<br>LN,FN,MN,S</p>
+                                        </td>
+                                        <td>District</td>
+                                        <td>Source</td>
+                                        <td>Year</td>
+                                        <td>File</td>
 
 
-                                                <!-- <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label for="">First Name</label>
-                                                        <input type="text" class="form-control" name="First_Name" placeholder="Enter First Name">
-                                                    </div>
-                                                </div> -->
+                                        <td>Edit</td>
+                                        <td>Delete</td> -->
 
-                                            </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $student->displayCav(); ?>
+                                </tbody>
 
-
-
-
-
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="">Name</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Name">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="">District</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter District">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="">Academic</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Academic">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="">Source</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Source">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="">Year</label>
-                                                    <input type="date" class="form-control" name="ContactNumber" placeholder="Enter Year">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="">Grade level</label>
-                                                    <input type="text" class="form-control" name="ContactNumber" placeholder="Enter Grade">
-                                                </div>
-                                            </div>
-
-
-                                            
-
-
-
-
-
-                                            <div class="col-12">
-
-                                                <form action="#" method="POST" enctype="multipart/form-data">
-                                                    <input type="file" name="fileupload" value="fileupload" id="fileupload">
-                                                    <label for="fileupload"> Select a file to upload</label>
-                                                    <input type="submit" value="submit">
-                                                </form>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary" name="AddAccountsSubmit">Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-
-
-                            </div>
-
-
-
-
+                            </table>
                         </div>
                     </div>
 
                 </div>
-
-                <div class="row" id="AllAccountsTable" style="display: none;">
-                    <div class="col-12">
-
-                        <form action="#" method="get">
-                            <div class="table-resposive">
-                                <table id="myTable" class="table table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>First Name</th>
-                                            <th>Middle Name</th>
-                                            <th>Last Name</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>DONT MIND THIS</td>
-                                            <td>DONT MIND THIS</td>
-                                            <td>DONT MIND THIS</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
-                    </div>
-
-
-                </div>
-
-            </div>
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
 
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div>
+            <strong>Copyright &copy; 2014-2021
+                <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            All rights reserved.
+        </footer>
+
         <!-- Control Sidebar -->
-
-        <!-- /.control-sidebar -->
-
-
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
 
     </div>
-    <!-- Main Footer -->
-    <?php
 
-    include_once('footer.php'); ?>
+    <script src="../plugins/jquery/jquery.min.js"></script>
+
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../dist/js/adminlte.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "scrollY": 300,
+                "scrollX": true
+            });
+        });
+
+
+
+        if (typeof window.history.pushState == 'function') {
+            window.history.pushState({}, "Hide", '<?php echo $_SERVER['PHP_SELF']; ?>');
+        }
+    </script>
+</body>
+
+</html>

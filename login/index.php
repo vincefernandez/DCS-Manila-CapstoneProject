@@ -2,7 +2,7 @@
 include_once('loginheader.php');
 include_once('../app/class.php');
 $student->loginUser();
-
+print_r($_SESSION['Account_Type']);
 ?>
 
 <body class="hold-transition sidebar-mini">
