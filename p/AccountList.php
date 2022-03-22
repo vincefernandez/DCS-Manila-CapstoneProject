@@ -237,7 +237,7 @@
                with font-awesome or any other icon font library -->
                <li class="nav-header">Administrator</li>
                         <li class="nav-item">
-                            <a href="Administrator.php" class="nav-link active">
+                            <a href="Administrator.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Add Accounts
@@ -246,7 +246,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="AccountList.php" class="nav-link">
+                            <a href="AccountList.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Accounts List

@@ -55,6 +55,7 @@ class myStudent
             $user = $stmt->fetch(); //Accessing the INFO
             $total = $stmt->rowCount();
             $user1 = $stmt->fetchAll();
+            $space = " ";
 
             if ($total > 0) {
 
@@ -64,7 +65,7 @@ class myStudent
                 // $_SESSION['Position'] = $user['Position'];
 
                 $_SESSION['login'] = $user['Employee_No'];
-                $_SESSION['FullName'] = $user['First_Name'] . $user['Last_Name'];
+                $_SESSION['FullName'] = $user['First_Name'] .$space. $user['Last_Name'];
                 $_SESSION['Account_Type'] = $user['Account_Type'];
 
                 if ($user['Section'] === "Admin") {
@@ -73,16 +74,16 @@ class myStudent
                     // $user['Employee_ID'] = $_SESSION['login'];
                 } elseif ($_SESSION['Account_Type'] == "NumericalCommunication") {
                     header("location: ../acc/Numerical.php");
-
-
+                } elseif($_SESSION['Account_Type'] == "RRMElementary"){
+                    header("location: ../acc/RRM.php");
+                } elseif ($_SESSION['Account_Type'] == "NumericalOthers"){
+                    header("location: ../acc/NumericalOthers.php");
                 } elseif ($_SESSION['Account_Type'] == "AdministrativeIssuance") {
-
                     header("location: ../acc/AdministrativeIssuance.php");
-                    $user['Employee_ID'] = $_SESSION['login'];
-                } elseif ($_SESSION['login'] == 4) {
-                    $_SESSION['login'] = $user['Employee_ID'];
-                    header("location: pageAdmin/RRM.php");
-                    $user['Employee_ID'] = $_SESSION['login'];
+                } elseif ($_SESSION['Account_Type'] == 'CAV') {
+                    header("location: ../acc/Cav.php");                
+                } elseif($_SESSION['Account_Type'] =='AC'){
+                    header("location: ../acc/AppointmentClearance.php");
                 } else {
                     // session_destroy();
                     echo "<div class='alert alert-danger text-center'>Error Please Try Again</div>";
@@ -365,19 +366,19 @@ class myStudent
             Email=:Email,Password=:Password, Account_Type=:Account_Type  WHERE Employee_No=:Employee_No";
             $statement = $connection->prepare($sql);
 
-            $statement->bindParam(':Employee_No', $Employee_No);
-            $statement->bindParam(':First_Name', $First_Name);
-            $statement->bindParam(':Last_Name', $Last_Name);
-            $statement->bindParam(':Middle_Name', $Middle_Name);
-            $statement->bindParam(':Suffix', $Suffix);
-            $statement->bindParam(':Date_Birth', $Date_Birth);
-            $statement->bindParam(':Age', $Age);
-            $statement->bindParam(':Position', $Position);
+            $statement->bindParam(':Employee_No',$Employee_No);
+            $statement->bindParam(':First_Name',$First_Name);
+            $statement->bindParam(':Last_Name',$Last_Name);
+            $statement->bindParam(':Middle_Name',$Middle_Name);
+            $statement->bindParam(':Suffix',$Suffix);
+            $statement->bindParam(':Date_Birth',$Date_Birth);
+            $statement->bindParam(':Age',$Age);
+            $statement->bindParam(':Position',$Position);
 
-            $statement->bindParam(':Contact_Number', $Contact_NUmber);
-            $statement->bindParam(':Account_Type', $Account_Type);
-            $statement->bindParam(':Email', $Email);
-            $statement->bindParam(':Password', $Password);
+            $statement->bindParam(':Contact_Number',$Contact_NUmber);
+            $statement->bindParam(':Account_Type',$Account_Type);
+            $statement->bindParam(':Email',$Email);
+            $statement->bindParam(':Password',$Password);
 
 
             if ($statement->execute()) {
@@ -1745,6 +1746,35 @@ class myStudent
         }
         // echo json_encode($rows);
     }
+
+    public function DisplayAdministrativeIssuanceRecords(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            echo "<td><a href='administrativeissuanceAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+            echo "<td>$user[Control_Number]</td>";
+            echo "<td>$user[Memorandum_Number]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Date]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+           
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
+    
     public function DisplayAdministrativeIssuance()
     {
         $connection = $this->OpenConnection();
@@ -1756,7 +1786,7 @@ class myStudent
         foreach ($users as $user) {
             // $rows[] = $user;
             echo "<tr>";
-            echo "<td><a href='administrativeissuanceAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+            // echo "<td><a href='#' class='btn btn-info'>View</a></button></td>";
             echo "<td>$user[Control_Number]</td>";
             echo "<td>$user[First_Name]</td>";
             echo "<td>$user[Last_Name]</td>";
@@ -1796,7 +1826,7 @@ class myStudent
         foreach ($users as $user) {
             // $rows[] = $user;
             echo "<tr>";
-            echo "<td><a href='cavAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+            echo "<td><a href='cavAdd.php?Add=$user[Files_ID]' class='btn btn-info'>View</a></button></td>";
             echo "<td>$user[Control_Number]</td>";
             echo "<td>$user[First_Name]</td>";
             echo "<td>$user[Last_Name]</td>";

@@ -59,15 +59,15 @@ print_r($_SESSION['Account_Type']);
                   </div>
                   <!--Email Input-->
                   <div class="form-group">
-                    <input type="text" class="w-form-input" placeholder="Enter Email" name="Email">
+                    <input type="text" class="form-control" placeholder="Enter Email" name="Email">
                   </div>
                   <!--Password Input-->
                   <div class="form-group">
-                    <input type="password" class="w-form-input"  placeholder="Enter Password" name="Password">
+                    <input type="password" class="form-control"  placeholder="Enter Password" name="Password">
                   </div>
                   <!--Login Button-->
                   <div class="w-form-group">
-                    <button class="w-form-button" type="submit" name="LoginSubmit">Login</button>
+                    <button class="w-form-button form-control" type="submit" name="LoginSubmit">Login</button>
                   </div>
 
                 </form>

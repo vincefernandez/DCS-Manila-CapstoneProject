@@ -367,82 +367,90 @@ $student->UpdateAccounts();
                                                 <div class="mb-3">
                                                     <!-- <label class="form-label">Employee No.</label> -->
                                                     <input type="hidden" class="form-control" name="Employee_No" value="<?php echo"$ID"?>" />
+                                                    <label class="form-label">Employee No.</label>
+                                                    <input type="text" class="form-control" name="Employee_No" value="<?php echo"$user[Employee_No]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" name="First_Name" value="<?php echo" $user[First_Name]";?>">
+                                                    <input type="text" class="form-control" name="First_Name" value="<?php echo"$user[First_Name]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Middle Name</label>
-                                                    <input type="text" class="form-control" name="Middle_Name" value="<?php echo" $user[Middle_Name]";?>">
+                                                    <input type="text" class="form-control" name="Middle_Name" value="<?php echo"$user[Middle_Name]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" name="Last_Name" value="<?php echo" $user[Last_Name]";?>">
+                                                    <input type="text" class="form-control" name="Last_Name" value="<?php echo"$user[Last_Name]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Suffix</label>
-                                                    <input type="text" class="form-control" name="Suffix" value="<?php echo" $user[Suffix]";?>">
+                                                    <input type="text" class="form-control" name="Suffix" value="<?php echo"$user[Suffix]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Birth Date</label>
-                                                    <input type="text" class="form-control" name="Birth_Date" value="<?php echo" $user[Date_Birth]";?>">
+                                                    <input type="text" class="form-control" name="Birth_Date" value="<?php echo"$user[Date_Birth]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Age</label>
-                                                    <input type="number" class="form-control" name="Age" <?php echo" $user[Age]";?>>
+                                                    <input type="text" class="form-control" name="Age" value=" <?php echo"$user[Age]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Position</label>
-                                                    <input type="text" class="form-control" name="Position" value="<?php echo" $user[Position]";?>">
+                                                    <input type="text" class="form-control" name="Position" value="<?php echo"$user[Position]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Employment Date</label>
-                                                    <input type="text" class="form-control" name="Employment_Date" value="<?php echo" $user[Employment_Date]";?>" disabled>
+                                                    <input type="text" class="form-control" name="Employment_Date" value="<?php echo"$user[Employment_Date]";?>" >
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                                    <input type="email" class="form-control" name="Email" value="<?php echo" $user[Email]";?>">
+                                                    <input type="email" class="form-control" name="Email" value="<?php echo"$user[Email]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Password</label>
-                                                    <input type="password" class="form-control" name="Password" value="<?php echo" $user[Password]";?>">
+                                                    <input type="password" class="form-control" name="Password" value="<?php echo"$user[Password]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Contact Number</label>
-                                                    <input type="email" class="form-control" name="Contact_Number" value="<?php echo" $user[Contact_Number]";?>">
+                                                    <input type="text" class="form-control" name="Contact_Number" value="<?php echo"$user[Contact_Number]";?>">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Account Type</label>
                                                     <select class="form-select form-control" name="Account_Type">
-                                                        <option selected value="<?php echo" $user[Account_Type]";?>"><?php echo" $user[Employment_Date]";?></option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                        <option selected disabled><?php echo "$user[Account_Type]";?></option>
+                                                        <option value="RRMElementary">Receing Routing And Mailing / Elementary</option>
+                                                        <option value="RRMHighSchool">Receing Routing And Mailing / High School</option>
+                                                        <option value="AdministrativeIssuance">Administrative Issuance</option>
+                                                        <option value="CAV">Certification, Authentication and Verification</option>
+                                                        <option value="NumericalCommunication">Numerical Files / Communication</option>
+                                                        <option value="NumericalOthers">Numerical Files / Others </option>
+                                                        <option value="AC">Appointment and Clearances / 201 Files</option>
+
+
                                                     </select>
                                                 </div>
                                             </div>

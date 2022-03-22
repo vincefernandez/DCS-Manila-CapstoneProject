@@ -383,7 +383,7 @@ $TwoDigitsRandomNumber = rand(10,99);
 
                                                     $Result = $TwoDigitsRandomNumber ."-" . $rand. "-" .$FourDigitRandomNumber;
                                                     ?>
-                                                    <input type="text" class="form-control" value="<?php echo $Result?>" name="Employee_No" readonly />
+                                                    <input type="text" class="form-control" name="Employee_No"  />
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -431,7 +431,7 @@ $TwoDigitsRandomNumber = rand(10,99);
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Employment Date</label>
-                                                    <input type="text" class="form-control" name="Employment_Date" value="<?php echo date("Y-m-d h-i-s") ?>" readonly>
+                                                    <input type="text" class="form-control" name="Employment_Date" >
                                                 </div>
                                             </div>
                                             <div class="col-6">

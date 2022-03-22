@@ -30,9 +30,6 @@ $fullname = $_SESSION['FullName'];
 </style>
 
 <body class="hold-transition sidebar-mini">
-    <?php
-    $student->UpdateAppointmentClearance();
-    ?>
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -42,33 +39,37 @@ $fullname = $_SESSION['FullName'];
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-              
+
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-               
+
 
                 <!-- Messages Dropdown Menu -->
-               
+
                 <!-- Notifications Dropdown Menu -->
-                
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-               
+                <!-- <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li> -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-user"></i>
                         Profile
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header"><?php echo $fullname ?></span>
+                        <span class="dropdown-header"><?php echo " $fullname"; ?></span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="../p/profilepage.php" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i> Profile
 
                         </a>
@@ -128,12 +129,12 @@ $fullname = $_SESSION['FullName'];
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
                         <li class="nav-header">
-                            <h1 class="small">Appointment and Clearances / 201 Files</h1>
-                        </li>
+                            <h1 class="small">Administrative Issuance</h1>
                         </li>
                         <li class="nav-item">
-                            <a href="AppointmentClearancelist.php" class="nav-link active">
+                            <a href="Administrativeissuancelist.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     All Records
@@ -141,11 +142,12 @@ $fullname = $_SESSION['FullName'];
                                 </p>
                             </a>
                         </li>
+                       
                         <li class="nav-item">
-                            <a href="AppointmentClearance.php" class="nav-link">
+                            <a href="AdministrativeIssuance.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Add Records
+                                    Administrative Issuance Records
                                     <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
@@ -166,11 +168,11 @@ $fullname = $_SESSION['FullName'];
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <!-- Change This -->
-                            <!-- <h1>All Records</h1> -->
+                            <!-- <h1>Name Per Page</h1> -->
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <!-- <li class="breadcrumb-item"><a href="./AppointmentClearance.php">Add Records</a></li> -->
+                                <!-- <li class="breadcrumb-item"><a href="AdministrativeIssuance.php">Add Record</a></li> -->
                                 <li class="breadcrumb-item active">All Records</li>
                             </ol>
                         </div>
@@ -185,28 +187,22 @@ $fullname = $_SESSION['FullName'];
                     <table id="example" class="table table-bordered dt-responsive" style="width:100%">
                         <thead>
                             <tr>
-
                                 <th>Action</th>
                                 <th>Control Number</th>
+                                <th>Memorandum Number</th>
+
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Middle_Name</th>
+                                <th>Middle Name</th>
                                 <th>Suffix</th>
                                 <th>Document Type</th>
-                                <th>Release Number</th>
-                                <th>Source</th>
-                                <th>Document Status</th>
-                                <th>Purpose</th>
-                                <th>Classification Number</th>
-                                <th>District</th>
-                                <th>Academic</th>
-                                <th>Year</th>
-                                <th>Grade Level</th>
-                                <th>CAV_ID</th>
-                                <th>Date_Administrative</th>
-                                <th>Memorandum_Number date</th>
-                                <th>File</th>
                                 <th>Date</th>
+
+                                <th>File</th>
+
+
+
+
 
 
 
@@ -214,7 +210,7 @@ $fullname = $_SESSION['FullName'];
                         </thead>
 
                         <tbody>
-                            <?php $student->DisplayAppointmentClearance() ?>
+                            <?php $student->DisplayAdministrativeIssuanceRecords() ?>
                         </tbody>
                     </table>
                 </div>
@@ -326,6 +322,12 @@ $fullname = $_SESSION['FullName'];
                 // ]
             });
         });
+
+
+        let table = document.getElementById('example');
+        setInterval(function() {
+            table.ajax.reload();
+        }, 30000);
     </script>
 </body>
 
