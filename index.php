@@ -1,6 +1,6 @@
 <?php
-include_once('app/class.php');
-$student->AddAccounts();
+// include_once('app/class.php');
+// $student->AddAccounts();
 ?>
 
 <!DOCTYPE html>
