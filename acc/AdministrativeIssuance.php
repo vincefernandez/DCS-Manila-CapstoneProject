@@ -126,7 +126,7 @@ $student->AdministrativeIssuanceAddRecords();
                 </p>
               </a>
             </li>
-           
+
             <li class="nav-item">
               <a href="AdministrativeIssuanceRecords.php" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>

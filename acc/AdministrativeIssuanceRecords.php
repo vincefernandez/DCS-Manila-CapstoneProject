@@ -2,6 +2,10 @@
 include_once('../app/class.php');
 session_start();
 $fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
+
+    header('location: ../p/403.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +14,7 @@ $fullname = $_SESSION['FullName'];
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Administrator</title>
+    <title>Administrative Issuance</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
@@ -142,7 +146,7 @@ $fullname = $_SESSION['FullName'];
                                 </p>
                             </a>
                         </li>
-                       
+
                         <li class="nav-item">
                             <a href="AdministrativeIssuance.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>

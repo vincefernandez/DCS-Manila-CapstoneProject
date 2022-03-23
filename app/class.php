@@ -2,10 +2,10 @@
 
 class myStudent
 {
-    private $db = "heroku_05562988b4bb0d7";
-    private $server = "mysql:host=us-cdbr-east-05.cleardb.net";
-    private $user = "b7ef41912e223b";
-    private $pass = "3cc18d32";
+
+    private $server = "mysql:host=localhost;dbname=records";
+    private $user = "root";
+    private $pass = "";
 
 
     private $option = array(
@@ -21,7 +21,7 @@ class myStudent
 
         try {
 
-            $this->con = new PDO($this->server, $this->user, $this->pass, $this->db, $this->option);
+            $this->con = new PDO($this->server, $this->user, $this->pass, $this->option);
             return $this->con;
         } catch (PDOException $e) {
             echo "ERROR:" . $e->getMessage();
@@ -81,7 +81,7 @@ class myStudent
                 } elseif ($_SESSION['Account_Type'] == "AdministrativeIssuance") {
                     header("location: ../acc/AdministrativeIssuance.php");
                 } elseif ($_SESSION['Account_Type'] == 'CAV') {
-                    header("location: ../acc/Cav.php");                
+                    header("location: ../acc/Cav.php");
                 } elseif($_SESSION['Account_Type'] =='AC'){
                     header("location: ../acc/AppointmentClearance.php");
                 } else {
@@ -1767,14 +1767,14 @@ class myStudent
             echo "<td>$user[Document_Type]</td>";
             echo "<td>$user[Date]</td>";
             echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
-           
+
 
             // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
 
             echo "</tr>";
         }
     }
-    
+
     public function DisplayAdministrativeIssuance()
     {
         $connection = $this->OpenConnection();
@@ -2334,4 +2334,4 @@ class myStudent
 }
 
 $student = new myStudent();
-$pdo = new PDO('mysql:host=us-cdbr-east-05.cleardb.net;dbname=heroku_05562988b4bb0d7', 'b7ef41912e223b', '3cc18d32');
+$pdo = new PDO('mysql:host=localhost;dbname=records', 'root', '');

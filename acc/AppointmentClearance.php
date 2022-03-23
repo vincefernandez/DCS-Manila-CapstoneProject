@@ -3,6 +3,10 @@ include_once('../app/class.php');
 include_once('../template/header.php');
 session_start();
 $fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'AC') {
+
+  header('location: ../p/403.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,20 +72,17 @@ $student->AppointmentCLearanceAddRecords();
             Profile
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-header"><?php echo $fullname ?></span>
+            <span class="dropdown-header"><?php echo $fullname; ?></span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> Profile
+            <a href="../p/profilepage.php" class="dropdown-item">
+              <i class="fas fa-user mr-2"></i> Profile
 
             </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> Settings
 
-            </a>
             <div class="dropdown-divider"></div>
             <a href="../app/logout.php" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> Logout
+              <!-- <i class="fas fa-file mr-2"></i> -->
+              <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
             </a>
 
@@ -142,15 +143,15 @@ $student->AppointmentCLearanceAddRecords();
                 </p>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="AppointmentClearance.php" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Add Records
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+
                 </p>
               </a>
-            </li>
+            </li> -->
 
 
           </ul>
@@ -278,11 +279,11 @@ $student->AppointmentCLearanceAddRecords();
         <!--END OF CONTAINER-->
       </section>
     </div>
-    <footer class="main-footer">
+    <!-- <footer class="main-footer">
 
       <strong>Copyright &copy; 2021-2022
         <a href="#">Cerberus</a>Capstone Project</strong> All rights reserved.
-    </footer>
+    </footer> -->
   </div>
 
 

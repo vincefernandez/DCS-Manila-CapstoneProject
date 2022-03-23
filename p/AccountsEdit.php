@@ -6,7 +6,12 @@ $ID = $_GET['Edit'];
 if($ID === null) {
     echo"";
 }
-print_r($ID);
+
+if ($_SESSION['Account_Type'] !== 'Admin') {
+
+    header('location: ../p/403.php');
+}
+// print_r($ID);
 $student->UpdateAccounts();
 ?>
 

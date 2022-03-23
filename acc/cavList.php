@@ -2,6 +2,10 @@
 include_once('../app/class.php');
 session_start();
 $fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'CAV') {
+
+    header('location: ../p/403.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,30 +62,27 @@ $fullname = $_SESSION['FullName'];
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-user"></i>
-                        Profile
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header"><?php echo $fullname ?></span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Profile
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-user"></i>
+            Profile
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-header"><?php echo $fullname; ?></span>
+            <div class="dropdown-divider"></div>
+            <a href="../p/profilepage.php" class="dropdown-item">
+              <i class="fas fa-user mr-2"></i> Profile
 
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> Settings
+            </a>
 
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="../app/logout.php" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> Logout
+            <div class="dropdown-divider"></div>
+            <a href="../app/logout.php" class="dropdown-item">
+              <!-- <i class="fas fa-file mr-2"></i> -->
+              <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
-                        </a>
+            </a>
 
-                    </div>
-                </li>
+          </div>
+        </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -138,15 +139,15 @@ $fullname = $_SESSION['FullName'];
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <button href="Cav.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Add Records
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
+
                                 </p>
                             </button>
-                        </li>
+                        </li> -->
 
                     </ul>
                 </nav>
@@ -163,7 +164,7 @@ $fullname = $_SESSION['FullName'];
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <!-- Change This -->
-
+                            <a href='../acc/Cav.php'><button class="btn btn-primary">Add Records</button></a>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">

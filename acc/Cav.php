@@ -3,6 +3,10 @@ include_once('../app/class.php');
 include_once('../template/header.php');
 session_start();
 $fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'CAV') {
+
+    header('location: ../p/403.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,7 @@ $student->CAVAddRecords();
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-               
+
             </ul>
 
             <!-- Right navbar links -->
@@ -49,20 +53,17 @@ $student->CAVAddRecords();
                         Profile
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header"><?php echo $fullname?></span>
+                        <span class="dropdown-header"><?php echo $fullname; ?></span>
                         <div class="dropdown-divider"></div>
                         <a href="../p/profilepage.php" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Profile
+                            <i class="fas fa-user mr-2"></i> Profile
 
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> Settings
 
-                        </a>
                         <div class="dropdown-divider"></div>
                         <a href="../app/logout.php" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> Logout
+                            <!-- <i class="fas fa-file mr-2"></i> -->
+                            <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
                         </a>
 
@@ -123,15 +124,15 @@ $student->CAVAddRecords();
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="Cav.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Add Records
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
+
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
 
 
                     </ul>
@@ -153,7 +154,7 @@ $student->CAVAddRecords();
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                               
+
                                 <li class="breadcrumb-item active">Add record</li>
                             </ol>
                         </div>

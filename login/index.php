@@ -1,107 +1,183 @@
 <?php
-include_once('loginheader.php');
 include_once('../app/class.php');
+session_start();
 $student->loginUser();
-print_r($_SESSION['Account_Type']);
+
+
+if ($_SESSION['Account_Type'] == 'Admin') {
+?>
+  <script type="text/javascript">
+    window.location.href = "../p/administrator.php";
+    alert("You must log out first");
+  </script>
+<?php
+  // header('location: ../p/administrator.php');
+}
+if ($_SESSION['Account_Type'] == 'AC') {
+  ?>
+  <script type="text/javascript">
+    window.location.href = "../acc/AppointmentClearance.php";
+    alert("You must log out first");
+  </script>
+<?php
+
+}
+if ($_SESSION['Account_Type'] == 'RRMElementary') {
+  ?>
+  <script type="text/javascript">
+    window.location.href = "../acc/RRM.php";
+    alert("You must log out first");
+  </script>
+<?php
+}
+if ($_SESSION['Account_Type'] == 'NumericalOthers') {
+  ?>
+  <script type="text/javascript">
+    window.location.href = "../acc/NumericalOthers.php";
+    alert("You must log out first");
+  </script>
+<?php
+}
+if ($_SESSION['Account_Type'] == 'NumericalCommunication') {
+  ?>
+  <script type="text/javascript">
+    window.location.href = "../acc/Numerical.php";
+    alert("You must log out first");
+  </script>
+<?php
+}
+if ($_SESSION['Account_Type'] == 'CAV') {
+  ?>
+  <script type="text/javascript">
+    window.location.href = "../acc/CAV.php";
+    alert("You must log out first");
+  </script>
+<?php
+}
+if ($_SESSION['Account_Type'] == 'AdministrativeIssuance') {
+  ?>
+  <script type="text/javascript">
+    window.location.href = "../acc/AdministrativeIssuance.php";
+    alert("You must log out first");
+  </script>
+<?php
+}
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Administrator</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <!-- ADD YOUR CSS HERE -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+
+  <!-- Modified and overide style -->
+  <link rel="stylesheet" href="../dist/css/wyrlo.css">
+  <!-- Ions Icon style -->
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+</head>
+
 <body class="hold-transition sidebar-mini">
+  <!-- Site wrapper -->
 
 
+  <!-- Main content -->
+
+  <section class="content bg-home-tracker" style="background-image: url(../dist/img/bg-tracker.jpg)">
+    <div class="bg-overlay-login"></div>
+
+    <!-- START OF RRM -->
 
 
-  <!-- START TO THIS CONTENT -->
+    <div class="w-flex-row">
 
-  <div class="wrapper">
 
-    <div class="main-content">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Records Services Manila</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#ROOTFILE">DCS Tracking</a></li>
-                <li class="breadcrumb-item active">Login</li>
-              </ol>
-            </div>
-          </div>
+      <div class="w-item w-dvider w-sm-item">
+
+        <div class="w-wrap">
+          <img src="../dist/img/dcslogo.png" width="150">
+          <p class="w-logo-text">&nbsp;&nbsp;DCS-RMIS</p>
         </div>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="#Sample">
-          <!--YOU CAN ADD CLASS CSS HERE! -->
+      </div>
+      <div class="w-dvider"></div>
 
 
-          <div class="w-flex-row">
-            <div class="w-item w-dvider w-sm-item">
 
-              <div class="w-wrap">
-                <img src="../dist/img/dcslogo.png" width="150">
-                <p class="w-logo-text">&nbsp;&nbsp;DCS-RMIS</p>
-              </div>
+      <div class="w-item smwidth-item">
+        <div class="w-wrap ">
+          <form class="w-login-form" action="index.php" method="POST" style="background-color: rbga(168, 204, 215, 0.6);">
+            <div class="w-form-header">
+
+              <p class="w-text-form">Login to access your dashboard</p>
             </div>
-            <div class="w-dvider"></div>
-
-
-
-            <div class="w-item smwidth-item">
-              <div class="w-wrap">
-                <form class="w-login-form" action="index.php" method="POST">
-                  <div class="w-form-header">
-
-                    <p class="w-text-form">Login to access your dashboard</p>
-                  </div>
-                  <!--Email Input-->
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Enter Email" name="Email">
-                  </div>
-                  <!--Password Input-->
-                  <div class="form-group">
-                    <input type="password" class="form-control"  placeholder="Enter Password" name="Password">
-                  </div>
-                  <!--Login Button-->
-                  <div class="w-form-group">
-                    <button class="w-form-button form-control" type="submit" name="LoginSubmit">Login</button>
-                  </div>
-
-                </form>
-              </div>
-              <!--/.wrap-->
-
+            <!--Email Input-->
+            <div class="w-form-group">
+              <input type="text" class="w-form-input" name="Email" placeholder="email@example.com">
             </div>
-          </div>
+            <!--Password Input-->
+            <div class="w-form-group">
+              <input type="password" class="w-form-input" name="Password" placeholder="password">
+            </div>
+            <!--Login Button-->
+            <div class="w-form-group">
+              <button class="w-form-button" name="LoginSubmit" type="submit">Login</button>
+            </div>
 
-          <!--/.wrap-->
-          <!-- <div class="mb-3">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Connect</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword">
-            </div>
-          </div> -->
+          </form>
         </div>
+        <!--/.wrap-->
 
-
-      </section>
-
+      </div>
     </div>
 
 
+    <div id="particles-js">
 
+      <script type="text/javascript" src="../dist/js/particles.js"></script>
+      <script type="text/javascript" src="../dist/js/app.js"></script>
+    </div>
+    <!-- END OF RRM -->
+
+  </section>
 
   </div>
-  <?php
 
-  include_once('../p/footer.php');
-  ?>
+
+  <?php include('../template/footerclass.php'); ?>
+
+
+  <aside class="control-sidebar control-sidebar-dark">
+    <div>
+      Anything ADDED HERE
+    </div>
+  </aside>
+
+  </div>
+
+  <script src="../plugins/jquery/jquery.min.js"></script>
+
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="../dist/js/adminlte.min.js"></script>
+
+  <script>
+    if (typeof window.history.pushState == 'function') {
+      window.history.pushState({}, "Hide", '<?php echo $_SERVER['PHP_SELF ']; ?>');
+    }
+  </script>
+</body>
+
+</html>

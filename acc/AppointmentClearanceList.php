@@ -2,6 +2,10 @@
 include_once('../app/class.php');
 session_start();
 $fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'AC') {
+
+    header('location: ../p/403.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -42,24 +46,24 @@ $fullname = $_SESSION['FullName'];
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-              
+
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-               
+
 
                 <!-- Messages Dropdown Menu -->
-               
+
                 <!-- Notifications Dropdown Menu -->
-                
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-               
+
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-user"></i>
@@ -141,15 +145,15 @@ $fullname = $_SESSION['FullName'];
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="AppointmentClearance.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Add Records
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
+
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
 
                     </ul>
                 </nav>
@@ -166,7 +170,7 @@ $fullname = $_SESSION['FullName'];
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <!-- Change This -->
-                            <!-- <h1>All Records</h1> -->
+                            <a href='../acc/AppointmentClearance.php'><button class="btn btn-primary">Add Records</button></a>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
