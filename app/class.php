@@ -3,9 +3,9 @@
 class myStudent
 {
 
-    private $server = "mysql:host=localhost;dbname=records";
-    private $user = "root";
-    private $pass = "";
+    private $server = "mysql:host=us-cdbr-east-05.cleardb.net;dbname= heroku_05562988b4bb0d7";
+    private $user = "b7ef41912e223b";
+    private $pass = "3cc18d32";
 
 
     private $option = array(
