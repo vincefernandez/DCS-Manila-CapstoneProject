@@ -2,7 +2,7 @@
 include_once('../app/class.php');
 session_start();
 $fullname = $_SESSION['FullName'];
-if ($_SESSION['Account_Type'] !== 'NumericalCommunication') {
+if ($_SESSION['Account_Type'] !== 'NumericalOthers') {
 
     header('location: ../p/403.php');
 }
