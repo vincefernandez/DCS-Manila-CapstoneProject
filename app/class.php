@@ -2,8 +2,8 @@
 
 class myStudent
 {
-
-    private $server = "mysql:host=us-cdbr-east-05.cleardb.net;dbname=heroku_05562988b4bb0d7";
+    private $db = "heroku_05562988b4bb0d7";
+    private $server = "mysql:host=us-cdbr-east-05.cleardb.net";
     private $user = "b7ef41912e223b";
     private $pass = "3cc18d32";
 
@@ -21,7 +21,7 @@ class myStudent
 
         try {
 
-            $this->con = new PDO($this->server, $this->user, $this->pass, $this->option);
+            $this->con = new PDO($this->server, $this->user, $this->pass, $this->db, $this->option);
             return $this->con;
         } catch (PDOException $e) {
             echo "ERROR:" . $e->getMessage();
