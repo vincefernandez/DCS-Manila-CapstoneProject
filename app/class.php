@@ -2334,4 +2334,4 @@ class myStudent
 }
 
 $student = new myStudent();
-$pdo = new PDO('mysql:host=localhost;dbname=records', 'root', '');
+$pdo = new PDO('mysql:host=us-cdbr-east-05.cleardb.net;dbname=heroku_05562988b4bb0d7', 'b7ef41912e223b', '3cc18d32');
