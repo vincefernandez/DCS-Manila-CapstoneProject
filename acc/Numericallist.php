@@ -2,7 +2,7 @@
 include_once('../app/class.php');
 session_start();
 $fullname = $_SESSION['FullName'];
-if ($_SESSION['Account_Type'] !== 'NumericalCommunication') {
+if ($_SESSION['Account_Type'] !== 'NumericalCommunication' AND ($_SESSION['Account_Type'] !== 'NumericalOthers')) {
 
     header('location: ../p/403.php');
 }
@@ -101,10 +101,10 @@ if ($_SESSION['Account_Type'] !== 'NumericalCommunication') {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
@@ -138,15 +138,29 @@ if ($_SESSION['Account_Type'] !== 'NumericalCommunication') {
                                 </p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="Numerical.php" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tree"></i>
                                 <p>
-                                    Add Records
-
+                                    Numerical
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                        </li> -->
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="NumericallistRecords.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Communication</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="NumericalOthersRecords.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Others</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                     </ul>
                 </nav>
@@ -183,7 +197,7 @@ if ($_SESSION['Account_Type'] !== 'NumericalCommunication') {
                         <thead>
                             <tr>
 
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                                 <th>Control Number</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -222,7 +236,7 @@ if ($_SESSION['Account_Type'] !== 'NumericalCommunication') {
 
         <footer class="main-footer">
             <!-- <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div> -->
-            <strong>Copyright &copy; 2014-2021
+            <strong>Copyright &copy; 2021-2022
                 <a href="#">Cerberus</a>Capstone Project</strong> All rights reserved.
         </footer>
 

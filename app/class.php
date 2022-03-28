@@ -65,27 +65,31 @@ class myStudent
                 // $_SESSION['Position'] = $user['Position'];
 
                 $_SESSION['login'] = $user['Employee_No'];
-                $_SESSION['FullName'] = $user['First_Name'] .$space. $user['Last_Name'];
+                $_SESSION['ID'] = $user['Users_ID'];
+
+                $_SESSION['FullName'] = $user['First_Name'] . $space . $user['Last_Name'];
                 $_SESSION['Account_Type'] = $user['Account_Type'];
 
                 if ($user['Section'] === "Admin") {
-                    header("location: ../p/administrator.php");
+                    header("location: ../p/Administrator.php");
                     // $_SESSION['ID'] = $user['Account_ID'];
                     // $user['Employee_ID'] = $_SESSION['login'];
                 } elseif ($_SESSION['Account_Type'] == "NumericalCommunication") {
-                    header("location: ../acc/Numerical.php");
-                } elseif($_SESSION['Account_Type'] == "RRMElementary"){
+                    header("location: ../acc/Numericallist.php");
+                } elseif ($_SESSION['Account_Type'] == "RRMElementary") {
                     header("location: ../acc/RRM.php");
-                } elseif ($_SESSION['Account_Type'] == "NumericalOthers"){
-                    header("location: ../acc/NumericalOthers.php");
+                } elseif ($_SESSION['Account_Type'] == "NumericalOthers") {
+                    header("location: ../acc/NumericalOtherslist.php");
                 } elseif ($_SESSION['Account_Type'] == "AdministrativeIssuance") {
-                    header("location: ../acc/AdministrativeIssuance.php");
+                    header("location: ../acc/Administrativeissuancelist.php");
                 } elseif ($_SESSION['Account_Type'] == 'CAV') {
-                    header("location: ../acc/Cav.php");
-                } elseif($_SESSION['Account_Type'] =='AC'){
-                    header("location: ../acc/AppointmentClearance.php");
-                } else {
-                    // session_destroy();
+                    header("location: ../acc/Cavlist.php");
+                } elseif ($_SESSION['Account_Type'] == 'AC') {
+                    header("location: ../acc/AppointmentClearancelist.php");
+                } elseif ($_SESSION['Account_Type'] == 'RRMHighSchool') {
+                    header("location: ../acc/RRMHS.php");
+                }else {
+                    session_destroy();
                     echo "<div class='alert alert-danger text-center'>Error Please Try Again</div>";
                 }
                 // if($_SESSION['Position'] == "Releasing"){
@@ -211,6 +215,48 @@ class myStudent
 
 
     }
+    public function UploadTakePhoto(){
+        $connection = $this->OpenConnection();
+
+        if(isset($_FILES["webcam"]["tmp_name"])){
+            $tmpName = $_FILES["webcam"]["tmp_name"];
+            $imageName = date('Y.m.d') . "  - " . date("h.i.sa") . '  .jpeg';
+            move_uploaded_file($tmpName, 'img/' . $imageName);
+            $date = date("Y/m/d") . " & " . date("h:i:sa");
+            $Files_ID = 14;
+
+
+
+
+            $sql = "insert into filesrecord (Photo,Date) Values($imageName,$date)";
+            // $sql = "UPDATE filesrecord SET
+            //  Photo=:Photo, Date=:Date WHERE Files_ID=:Files_ID";
+            $statement = $connection->prepare($sql);
+
+            // $statement->bindParam(':Files_ID', $Files_ID);
+
+            // $statement->bindParam(':Photo', $imageName);
+
+            // $statement->bindParam(':Date', $Date);
+
+
+
+            if ($statement->execute()) {
+            ?>
+                <script type="text/javascript">
+                    window.location.href = "../acc/RRMlist.php";
+                    alert("Release Successfully");
+                </script>
+            <?php
+            } else {
+            ?>
+                <script>
+                    alert('Error');
+                </script>
+            <?php
+            }
+        }
+    }
     public function UpdateAdministrativeIssuance()
     {
         $connection = $this->OpenConnection();
@@ -258,7 +304,7 @@ class myStudent
             ?>
                 <script type="text/javascript">
                     window.location.href = "../acc/administrativeissuancelist.php";
-                    alert("Edit Successfully");
+                    alert("Added Records Successfully");
                 </script>
             <?php
             } else {
@@ -317,7 +363,7 @@ class myStudent
             ?>
                 <script type="text/javascript">
                     window.location.href = "../acc/appointmentclearancelist.php";
-                    alert("Edit Succesfully");
+                    alert("Added Record Succesfully");
                 </script>
             <?php
             } else {
@@ -366,19 +412,19 @@ class myStudent
             Email=:Email,Password=:Password, Account_Type=:Account_Type  WHERE Employee_No=:Employee_No";
             $statement = $connection->prepare($sql);
 
-            $statement->bindParam(':Employee_No',$Employee_No);
-            $statement->bindParam(':First_Name',$First_Name);
-            $statement->bindParam(':Last_Name',$Last_Name);
-            $statement->bindParam(':Middle_Name',$Middle_Name);
-            $statement->bindParam(':Suffix',$Suffix);
-            $statement->bindParam(':Date_Birth',$Date_Birth);
-            $statement->bindParam(':Age',$Age);
-            $statement->bindParam(':Position',$Position);
+            $statement->bindParam(':Employee_No', $Employee_No);
+            $statement->bindParam(':First_Name', $First_Name);
+            $statement->bindParam(':Last_Name', $Last_Name);
+            $statement->bindParam(':Middle_Name', $Middle_Name);
+            $statement->bindParam(':Suffix', $Suffix);
+            $statement->bindParam(':Date_Birth', $Date_Birth);
+            $statement->bindParam(':Age', $Age);
+            $statement->bindParam(':Position', $Position);
 
-            $statement->bindParam(':Contact_Number',$Contact_NUmber);
-            $statement->bindParam(':Account_Type',$Account_Type);
-            $statement->bindParam(':Email',$Email);
-            $statement->bindParam(':Password',$Password);
+            $statement->bindParam(':Contact_Number', $Contact_NUmber);
+            $statement->bindParam(':Account_Type', $Account_Type);
+            $statement->bindParam(':Email', $Email);
+            $statement->bindParam(':Password', $Password);
 
 
             if ($statement->execute()) {
@@ -406,8 +452,12 @@ class myStudent
 
 
             $Files_ID = $_POST['ID'];
+            $Release_By = $_POST['Release_By'];
+            $Received_By = $_POST['Received_By'];
+            $Client_Position = $_POST['Client_Position'];
 
-            $Control_Number = $_POST['Control_Number'];
+            $Client_Received_Date = $_POST['Client_Received_Date'];
+            $Purpose = "Has been Release";
 
             $Date = $_POST['Date'];
 
@@ -415,13 +465,19 @@ class myStudent
 
 
             $sql = "UPDATE filesrecord SET
-             Control_Number=:Control_Number, Date=:Date WHERE Files_ID=:Files_ID";
+             Release_By=:Release_By, Received_By=:Received_By, Client_Position=:Client_Position, Client_Received_Date=:Client_Received_Date,
+             Purpose=:Purpose,
+             Date=:Date WHERE Files_ID=:Files_ID";
             $statement = $connection->prepare($sql);
 
             $statement->bindParam(':Files_ID', $Files_ID);
 
-            $statement->bindParam(':Control_Number', $Control_Number);
+            $statement->bindParam(':Release_By', $Release_By);
 
+            $statement->bindParam(':Received_By', $Received_By);
+            $statement->bindParam(':Client_Position', $Client_Position);
+            $statement->bindParam(':Client_Received_Date', $Client_Received_Date);
+            $statement->bindParam(':Purpose', $Purpose);
             $statement->bindParam(':Date', $Date);
 
 
@@ -430,7 +486,7 @@ class myStudent
             ?>
                 <script type="text/javascript">
                     window.location.href = "../acc/rrmlist.php";
-                    alert("Edit Successfully");
+                    alert("Release Successfully");
                 </script>
             <?php
             } else {
@@ -489,8 +545,8 @@ class myStudent
             if ($statement->execute()) {
             ?>
                 <script type="text/javascript">
-                    window.location.href = "../acc/numericalotherslist.php";
-                    alert("Edit Successfully");
+                    window.location.href = "../acc/NumericalOthersRecords.php";
+                    alert("Added Record Successfully");
                 </script>
             <?php
             } else {
@@ -548,8 +604,8 @@ class myStudent
             if ($statement->execute()) {
             ?>
                 <script type="text/javascript">
-                    window.location.href = "../acc/numericallist.php";
-                    alert("Edit Successfully");
+                    window.location.href = "../acc/NumericalOthersRecords.php";
+                    alert("Add Record Successfully");
                 </script>
             <?php
             } else {
@@ -610,7 +666,7 @@ class myStudent
             ?>
                 <script type="text/javascript">
                     window.location.href = "../acc/cavList.php";
-                    alert("Edit Successfully");
+                    alert("Added Record Successfully");
                 </script>
             <?php
             } else {
@@ -736,7 +792,6 @@ class myStudent
     }
 
 
-
     public function AddDatabaseToQueeing()
     {
 
@@ -763,11 +818,110 @@ class myStudent
           </div>";
         }
     }
-    public function DisplayWaitingQue()
-    {
+    public function DisplayWaitingElementary(){
         $connection = $this->OpenConnection();
 
-        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl Limit 1 offset 1");
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'Elementary' Limit 1 offset 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+
+
+        foreach ($users as $user) {
+
+
+            echo " <p><h6 class='text-center'><b> $user[Name] </b></h6> </p>";
+
+            echo "<p class='text-center'>$user[Purpose]</p>";
+            echo "<p class='text-center'>Window 1</p>";
+            echo "<p class='text-center'>Ticket Number : <b>$user[Ticket_Number]</b></p>";
+
+
+            // echo "<h3 class='text-center'>$user[Name]</h3>";
+            // echo "<p class='card-text text-center'>Ticket Number : $user[Ticket_Number] </p>";
+            // echo "<p class='card-text text-center'>Window 1 : $user[Purpose] </p>";
+        }
+
+        if (empty($users)) {
+            echo "No waiting List <br>";
+        }
+    }
+
+
+    public function NowservingHS(){
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'HighSchool' Limit 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+
+
+        foreach ($users as $user) {
+
+            echo "<p><h4 class='text-center'><b> $user[Name] </b></h4></p>";
+            echo "<p class='text-center'>$user[Purpose]</p>";
+            echo "<p class='text-center'>Window 2</p>";
+            echo "<p class='text-center'>Ticket Number : <b>$user[Ticket_Number]</b></p>";
+
+        }
+
+        if (empty($users)) {
+            echo "No waiting List <br>";
+        }
+    }
+
+    public function NowServingElementary(){
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'Elementary' Limit 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+
+
+        foreach ($users as $user) {
+
+            echo "<p><h4 class='text-center'><b> $user[Name] </b></h4></p>";
+            echo "<p class='text-center'>$user[Purpose]</p>";
+            echo "<p class='text-center'>Window 1</p>";
+            echo "<p class='text-center'>Ticket Number : <b>$user[Ticket_Number]</b></p>";
+
+        }
+
+        if (empty($users)) {
+            echo "No waiting List <br>";
+        }
+    }
+
+    public function DisplayWaitingHighschool(){
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'HighSchool' Limit 1 offset 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+
+
+        foreach ($users as $user) {
+
+
+            echo " <p><h6 class='text-center'><b> $user[Name] </b></h6> </p>";
+
+            echo "<p class='text-center'>$user[Purpose]</p>";
+            echo "<p class='text-center'>Window 2</p>";
+            echo "<p class='text-center'>Ticket Number : <b>$user[Ticket_Number]</b></p>";
+
+
+            // echo "<h3 class='text-center'>$user[Name]</h3>";
+            // echo "<p class='card-text text-center'>Ticket Number : $user[Ticket_Number] </p>";
+            // echo "<p class='card-text text-center'>Window 1 : $user[Purpose] </p>";
+        }
+
+        if (empty($users)) {
+            echo "No waiting List <br>";
+        }
+    }
+    public function DisplayWaitingQueHS(){
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'HighSchool' Limit 1 offset 1");
         $getUsers->execute();
         $users = $getUsers->fetchAll();
 
@@ -775,36 +929,80 @@ class myStudent
         foreach ($users as $user) {
             echo "<h3 class='text-center'>$user[Name]</h3>";
             echo "<p class='card-text text-center'>Ticket Number : $user[Ticket_Number] </p>";
+            echo "<p class='card-text text-center'>Window 1 : $user[Purpose] </p>";
         }
 
         if (empty($users)) {
             echo "No waiting List <br>";
         }
     }
-
-    public function DisplayNowserving()
+    public function DisplayWaitingQue()
     {
         $connection = $this->OpenConnection();
 
-        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl Limit 1");
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'Elementary' Limit 1 offset 1");
         $getUsers->execute();
         $users = $getUsers->fetchAll();
 
 
         foreach ($users as $user) {
             echo "<h3 class='text-center'>$user[Name]</h3>";
-            echo "<p class='card-text'>Ticket Number : $user[Ticket_Number] </p>";
+            echo "<p class='card-text text-center'>Ticket Number : $user[Ticket_Number] </p>";
+            echo "<p class='card-text text-center'>Window 1 : $user[Purpose] </p>";
         }
 
         if (empty($users)) {
             echo "No waiting List <br>";
         }
     }
+    public function DisplayNowServingHighschool(){
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'HighSchool' Limit 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+        //     foreach ($users as $user){
+        //     echo "<span class='name-now-serving-in-que'>$user[Name]</span>";
+        //     echo " <span class='transaction-type-in-que'>$user[Purpose]</span>";
+        //     echo " <span class='ticket-number-que'><b>Ticket number: </b>$user[Ticket_Number]</span>";
+        // }
+        foreach ($users as $user) {
+            echo "<h3 class='text-center'>$user[Name]</h3>";
+            echo "<p class='card-text text-center'>Ticket Number : $user[Ticket_Number] </p>";
+            echo "<p class='card-text text-center'>Window 1 : $user[Purpose] </p>";
+        }
+
+        if (empty($users)) {
+            echo "No Waiting List <br>";
+        }
+    }
+    public function DisplayNowserving()
+    {
+        $connection = $this->OpenConnection();
+
+        $getUsers = $connection->prepare("SELECT * FROM queeing_tbl where Purpose = 'Elementary' Limit 1");
+        $getUsers->execute();
+        $users = $getUsers->fetchAll();
+        //     foreach ($users as $user){
+        //     echo "<span class='name-now-serving-in-que'>$user[Name]</span>";
+        //     echo " <span class='transaction-type-in-que'>$user[Purpose]</span>";
+        //     echo " <span class='ticket-number-que'><b>Ticket number: </b>$user[Ticket_Number]</span>";
+        // }
+        foreach ($users as $user) {
+            echo "<h3 class='text-center'>$user[Name]</h3>";
+            echo "<p class='card-text text-center'>Ticket Number : $user[Ticket_Number] </p>";
+            echo "<p class='card-text text-center'>Window 1 : $user[Purpose] </p>";
+        }
+
+        if (empty($users)) {
+            echo "No Waiting List <br>";
+        }
+    }
     public function DisplayQueeingUser()
     {
         $connection = $this->OpenConnection();
 
-        $getUsers = $connection->prepare("SELECT Name,Purpose FROM queeing_tbl LIMIT 3");
+        $getUsers = $connection->prepare("SELECT Name,Purpose FROM queeing_tbl");
         $getUsers->execute();
         $users = $getUsers->fetchAll();
 
@@ -820,10 +1018,61 @@ class myStudent
     </div>";
         }
     }
+
+    public function DeleteFirstRowHS(){
+        $connection = $this->OpenConnection();
+        if(isset($_GET['Delete'])){
+            $sql = ("Delete From queeing_tbl Where Purpose = 'HighSchool' Limit 1");
+            $stmt = $this->OpenConnection()->query($sql);
+
+            $stmt->execute();
+                // header('location: ../acc/RRMElementaryQueueing.php');
+
+        }
+    }
+    public function DeleteFirstRow(){
+        $connection = $this->OpenConnection();
+        if(isset($_GET['Delete'])){
+            $sql = ("Delete From queeing_tbl Where Purpose = 'Elementary' Limit 1");
+            $stmt = $this->OpenConnection()->query($sql);
+
+            $stmt->execute();
+                // header('location: ../acc/RRMElementaryQueueing.php');
+
+        }
+
+    }
+    public function GetRowNumbersHighSchool(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From queeing_tbl Where Purpose = 'HighSchool' limit 9999 offset 2");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $count = $stmt->rowCount();
+
+        echo "There are $count Client on the waiting List";
+    }
+    public function GetRowNumbersElementary(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From queeing_tbl Where Purpose = 'Elementary' limit 9999 offset 2");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $count = $stmt->rowCount();
+
+        echo "There are $count Client on the waiting List";
+    }
+    public function getRowNumbersHS(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From queeing_tbl Where Purpose = 'HighSchool' limit 9999 offset 1");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $count = $stmt->rowCount();
+
+        echo "There are $count Client on the waiting List";
+    }
     public function getRowNumbers()
     {
         $connection = $this->OpenConnection();
-        $sql = ("Select * From queeing_tbl");
+        $sql = ("Select * From queeing_tbl Where Purpose = 'Elementary' limit 9999 offset 1");
         $stmt = $this->OpenConnection()->query($sql);
 
         $count = $stmt->rowCount();
@@ -1031,6 +1280,7 @@ class myStudent
 
 
             // if (isset($_POST['AddAccountsSubmit'])) {
+            $users_ID = uniqid();
             $Employee_No = $_POST['Employee_No'];
             $First_Name = $_POST['First_Name'];
             $Last_Name = $_POST['Last_Name'];
@@ -1052,8 +1302,8 @@ class myStudent
             $created_date = date("Y-m-d H:i:s");
 
             // THIS WILL GENERATE UNIQUE ID
-            $sql = "INSERT INTO  users_tbl  (Employee_No,First_Name,Last_Name,Middle_Name,Suffix,Date_Birth,Age,Position,Employment_Date,Contact_Number,Account_Type,Email,Password,Date)
-        VALUES ('$Employee_No','$First_Name','$Last_Name','$Middle_Name','$Suffix','$Date_Birth','$Age','$Position','$Employment_Date','$ContactNUmber','$Account_Type','$Email','$Password','$created_date')";
+            $sql = "INSERT INTO  users_tbl  (Employee_No,Users_ID,First_Name,Last_Name,Middle_Name,Suffix,Date_Birth,Age,Position,Employment_Date,Contact_Number,Account_Type,Email,Password,Date)
+        VALUES ('$Employee_No','$users_ID','$First_Name','$Last_Name','$Middle_Name','$Suffix','$Date_Birth','$Age','$Position','$Employment_Date','$ContactNUmber','$Account_Type','$Email','$Password','$created_date')";
             $connection->exec($sql);
             echo "<div class='alert alert-success' role='alert'>
           You have successfully created an Account!
@@ -1186,6 +1436,7 @@ class myStudent
     public function Fileupload1()
     {
         $Employee_No = $_SESSION['login'];
+        $ID = $_SESSION['ID'];
         $connection = $this->OpenConnection();
 
         if (isset($_POST['Fileupload'])) {
@@ -1224,13 +1475,13 @@ class myStudent
 
                         $sql = 'UPDATE users_tbl
         SET images = :images
-        WHERE Employee_No = :Employee_No';
+        WHERE Users_ID = :ID';
 
                         // prepare statement
                         $statement = $connection->prepare($sql);
 
                         // bind params
-                        $statement->bindParam(':Employee_No', $Employee_No, PDO::PARAM_INT);
+                        $statement->bindParam(':ID', $ID);
                         $statement->bindParam(':images', $target_file);
 
                         // execute the UPDATE statment
@@ -1317,9 +1568,9 @@ class myStudent
             echo "$image[images]";
         }
 
-        if (empty($imagelist)) {
-            echo "../dist/img/avatar.jpg";
-        }
+        // if (empty($imagelist) == null) {
+        //     echo "../dist/img/noimage.png";
+        // }
     }
 
     public function AdministrativeIssuanceAddRecords()
@@ -1707,6 +1958,8 @@ class myStudent
             echo "</tr>";
         }
     }
+
+
     public function DisplayRRMRecords()
     {
         $connection = $this->OpenConnection();
@@ -1718,6 +1971,8 @@ class myStudent
         foreach ($users as $user) {
             // $rows[] = $user;
             echo "<tr>";
+
+            echo "<td><a href='RRMRelease.php?Release=$user[Files_ID]' class='btn btn-danger'>Release</a></button></td>";
             echo "<td><a href='RRMadd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
             echo "<td>$user[Control_Number]</td>";
             echo "<td>$user[First_Name]</td>";
@@ -1746,8 +2001,100 @@ class myStudent
         }
         // echo json_encode($rows);
     }
+    public function DeleteCavRecords()
+    {
+        $connection = $this->OpenConnection();
 
-    public function DisplayAdministrativeIssuanceRecords(){
+        if (isset($_GET['Delete'])) {
+            $Delete = $_GET['Delete'];
+            $getUsers = $connection->prepare("Delete FROM filesrecord Where Files_ID=$Delete");
+
+            if ($getUsers->execute()) {
+            ?>
+                <script type="text/javascript">
+                    alert("Deleted Record Successfully");
+                    window.location.href = "../p/CavRecords.php";
+                </script>
+            <?php
+            }
+        }
+    }
+    public function DeleteAdministrativeIssuanceRecords()
+    {
+        $connection = $this->OpenConnection();
+
+        if (isset($_GET['Delete'])) {
+            $Delete = $_GET['Delete'];
+            $getUsers = $connection->prepare("Delete FROM filesrecord Where Files_ID=$Delete");
+
+            if ($getUsers->execute()) {
+            ?>
+                <script type="text/javascript">
+                    alert("Deleted Record Successfully");
+                    window.location.href = "../p/AdministrativeIssuance_Records.php";
+                </script>
+            <?php
+            }
+        }
+    }
+
+    public function DisplayAdministrativeIssuanceRecordsRRM(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            // echo "<td><a href='AdministrativeIssuance_Records.php?Delete=$user[Files_ID]' class='btn btn-info'>Delete Records</a></button></td>";
+            echo "<td>$user[Control_Number]</td>";
+            echo "<td>$user[Memorandum_Number]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Date]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
+    public function DisplayAdministrativeIssuanceRecordsAdmin()
+    {
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            echo "<td><a href='AdministrativeIssuance_Records.php?Delete=$user[Files_ID]' class='btn btn-info'>Delete Records</a></button></td>";
+            echo "<td>$user[Control_Number]</td>";
+            echo "<td>$user[Memorandum_Number]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Date]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
+    public function DisplayAdministrativeIssuanceRecords()
+    {
         $connection = $this->OpenConnection();
         $sql = ("Select * From filesrecord");
         $stmt = $this->OpenConnection()->query($sql);
@@ -1814,7 +2161,95 @@ class myStudent
         }
         // echo json_encode($rows);
     }
+    public function DisplayCavRecordsAdmin()
+    {
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
 
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            echo "<td><a href='CavRecords.php?Delete=$user[Files_ID]' class='btn btn-info'>Delete Records</a></button></td>";
+            echo "<td>$user[CAV_ID]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[District]</td>";
+            echo "<td>$user[Year]</td>";
+            echo "<td>$user[Source]</td>";
+            echo "<td>$user[Purpose]</td>";
+            echo "<td>$user[Date]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
+    public function displayCAVRRM(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            // echo "<td><a href='cavAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+            echo "<td>$user[CAV_ID]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[District]</td>";
+            echo "<td>$user[Year]</td>";
+            echo "<td>$user[Source]</td>";
+            echo "<td>$user[Purpose]</td>";
+            echo "<td>$user[Date]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
+    public function displayCavRecords1()
+    {
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            echo "<td><a href='cavAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+            echo "<td>$user[CAV_ID]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[District]</td>";
+            echo "<td>$user[Year]</td>";
+            echo "<td>$user[Source]</td>";
+            echo "<td>$user[Purpose]</td>";
+            echo "<td>$user[Date]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
     public function displayCav()
     {
         $connection = $this->OpenConnection();
@@ -1826,7 +2261,7 @@ class myStudent
         foreach ($users as $user) {
             // $rows[] = $user;
             echo "<tr>";
-            echo "<td><a href='cavAdd.php?Add=$user[Files_ID]' class='btn btn-info'>View</a></button></td>";
+            // echo "<td><a href='cavAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
             echo "<td>$user[Control_Number]</td>";
             echo "<td>$user[First_Name]</td>";
             echo "<td>$user[Last_Name]</td>";
@@ -1854,6 +2289,71 @@ class myStudent
         }
         // echo json_encode($rows);
     }
+
+    public function DisplayAppointmentClearanceRRM(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+
+            echo "<tr>";
+            // echo "<td><a href='AppointmentClearanceAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Release_Number]</td>";
+            echo "<td>$user[Source]</td>";
+            echo "<td>$user[Document_Status]</td>";
+            echo "<td>$user[Purpose]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+            echo "<td>$user[Date]</td>";
+            echo "</tr>";
+        }
+    }
+    public function DisplayAppointmentClearanceRecords()
+    {
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            echo "<td><a href='AppointmentClearanceAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+            // echo "<td>$user[Control_Number]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Release_Number]</td>";
+            echo "<td>$user[Source]</td>";
+            echo "<td>$user[Document_Status]</td>";
+            echo "<td>$user[Purpose]</td>";
+            // echo "<td>$user[Classification_Number]</td>";
+            // echo "<td>$user[District]</td>";
+            // echo "<td>$user[Academic]</td>";
+            // echo "<td>$user[Year]</td>";
+            // echo "<td>$user[Grade_Level]</td>";
+            // echo "<td>$user[CAV_ID]</td>";
+            // echo "<td>$user[Date_Administrative]</td>";
+            // echo "<td>$user[Memorandum_Number]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+            echo "<td>$user[Date]</td>";
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
     public function DisplayAppointmentClearance()
     {
         $connection = $this->OpenConnection();
@@ -1865,7 +2365,7 @@ class myStudent
         foreach ($users as $user) {
             // $rows[] = $user;
             echo "<tr>";
-            echo "<td><a href='AppointmentClearanceAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+            // echo "<td><a href='AppointmentClearanceAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
             echo "<td>$user[Control_Number]</td>";
             echo "<td>$user[First_Name]</td>";
             echo "<td>$user[Last_Name]</td>";
@@ -1956,6 +2456,76 @@ class myStudent
             echo "<td text-center>No Data <br></td>";
         }
     }
+
+    public function DisplayNumericalOthersRRM(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+
+            echo "<tr>";
+            // echo "<td><a href='Numerical-OthersAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Release_Number]</td>";
+            echo "<td>$user[Source]</td>";
+
+            echo "<td>$user[Purpose]</td>";
+            echo "<td>$user[Classification_Number]</td>";
+
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+            echo "<td>$user[Date]</td>";
+
+
+
+            echo "</tr>";
+        }
+    }
+    public function DisplayNumericalOthersRecords()
+    {
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            echo "<td><a href='Numerical-OthersAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+            // echo "<td>$user[Control_Number]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Release_Number]</td>";
+            echo "<td>$user[Source]</td>";
+            // echo "<td>$user[Document_Status]</td>";
+            echo "<td>$user[Purpose]</td>";
+            echo "<td>$user[Classification_Number]</td>";
+            // echo "<td>$user[District]</td>";
+            // echo "<td>$user[Academic]</td>";
+            // echo "<td>$user[Year]</td>";
+            // echo "<td>$user[Grade_Level]</td>";
+            // echo "<td>$user[CAV_ID]</td>";
+            // echo "<td>$user[Date_Administrative]</td>";
+            // echo "<td>$user[Memorandum_Number]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+            echo "<td>$user[Date]</td>";
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
     public function DisplayNumericalOthers()
     {
         $connection = $this->OpenConnection();
@@ -1967,7 +2537,7 @@ class myStudent
         foreach ($users as $user) {
             // $rows[] = $user;
             echo "<tr>";
-            echo "<td><a href='Numerical-OthersAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+            // echo "<td><a href='Numerical-OthersAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
             echo "<td>$user[Control_Number]</td>";
             echo "<td>$user[First_Name]</td>";
             echo "<td>$user[Last_Name]</td>";
@@ -1994,6 +2564,76 @@ class myStudent
             echo "</tr>";
         }
     }
+
+    public function DisplayNumericalRRM(){
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            // echo "<td><a href='NumericalAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Release_Number]</td>";
+            echo "<td>$user[Source]</td>";
+
+            echo "<td>$user[Purpose]</td>";
+            echo "<td>$user[Classification_Number]</td>";
+
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+            echo "<td>$user[Date]</td>";
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
+    public function DisplayNumericalRecordsComm()
+    {
+        $connection = $this->OpenConnection();
+        $sql = ("Select * From filesrecord");
+        $stmt = $this->OpenConnection()->query($sql);
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = array("data" => $users);
+        foreach ($users as $user) {
+            // $rows[] = $user;
+            echo "<tr>";
+            echo "<td><a href='NumericalAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Additional Records</a></button></td>";
+            // echo "<td>$user[Control_Number]</td>";
+            echo "<td>$user[First_Name]</td>";
+            echo "<td>$user[Last_Name]</td>";
+            echo "<td>$user[Middle_Name]</td>";
+            echo "<td>$user[Suffix]</td>";
+            echo "<td>$user[Document_Type]</td>";
+            echo "<td>$user[Release_Number]</td>";
+            echo "<td>$user[Source]</td>";
+            // echo "<td>$user[Document_Status]</td>";
+            echo "<td>$user[Purpose]</td>";
+            echo "<td>$user[Classification_Number]</td>";
+            // echo "<td>$user[District]</td>";
+            // echo "<td>$user[Academic]</td>";
+            // echo "<td>$user[Year]</td>";
+            // echo "<td>$user[Grade_Level]</td>";
+            // echo "<td>$user[CAV_ID]</td>";
+            // echo "<td>$user[Date_Administrative]</td>";
+            // echo "<td>$user[Memorandum_Number]</td>";
+            echo "<td><a href='../p/download1.php?filename=$user[File]'>$user[File]</a></td>";
+            echo "<td>$user[Date]</td>";
+
+            // echo "<td><a href='#?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+
+            echo "</tr>";
+        }
+    }
     public function DisplayNumericalRecords()
     {
         $connection = $this->OpenConnection();
@@ -2005,7 +2645,7 @@ class myStudent
         foreach ($users as $user) {
             // $rows[] = $user;
             echo "<tr>";
-            echo "<td><a href='NumericalAdd.php?Add=$user[Files_ID]' class='btn btn-info'>Add Records</a></button></td>";
+            // echo "<td><a href='NumericalAdd.php?Add=$user[Files_ID]' class='btn btn-info'>View</a></button></td>";
             echo "<td>$user[Control_Number]</td>";
             echo "<td>$user[First_Name]</td>";
             echo "<td>$user[Last_Name]</td>";

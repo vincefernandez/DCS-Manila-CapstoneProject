@@ -88,7 +88,7 @@ $student->RRMaddRecords();
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1();?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?php echo $fullname ?></a>
@@ -114,7 +114,7 @@ $student->RRMaddRecords();
                with font-awesome or any other icon font library -->
                         <li class="nav-header">Receiving Routing and Mailing</li>
                         <li class="nav-item">
-                            <a href="RRMQUE.php" class="nav-link ">
+                            <a href="RRMElementaryQueueing.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Queuing
@@ -131,17 +131,9 @@ $student->RRMaddRecords();
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="RRM.php" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Add Records
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#NotYetDone" class="nav-link">
+                            <a href="RRMAdministrative.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Administrative Issuance
@@ -150,7 +142,7 @@ $student->RRMaddRecords();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#NotYetDone" class="nav-link">
+                            <a href="CAVRRM.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Certification Authentication Verification
@@ -168,13 +160,13 @@ $student->RRMaddRecords();
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#NotYetDone" class="nav-link">
+                                    <a href="RRMNumerical.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Communication</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#NotYetDone" class="nav-link">
+                                    <a href="RRMNumericalOthers.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Others</p>
                                     </a>
@@ -182,7 +174,7 @@ $student->RRMaddRecords();
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#NotYetDone" class="nav-link">
+                            <a href="201FilesRRM.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Appointment and Clearance / 201 FIles
@@ -284,11 +276,11 @@ $student->RRMaddRecords();
                             <div class="button-for-uploads">
 
                                 <label class="button-for-select">Select file
-                                    <input type="file" name="file" id="file" /></td>
+                                    <input type="file" name="file" id="file"  required/></td>
                                 </label>
                             </div>
                             <div class="button-for-uploads" style="float: right !important;">
-                                <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                                 <button class="add-record-button rounded-add-record-button" type="submit" name="RRMSubmit">Submit</button>
                             </div>
                         </div>

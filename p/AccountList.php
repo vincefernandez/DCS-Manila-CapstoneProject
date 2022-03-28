@@ -26,6 +26,16 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
 </head>
+<style>
+    tr,
+    th,
+    td {
+        text-align: center;
+        /* color:white;
+    background-color: red; */
+    }
+</style>
+
 
 
 <body class="hold-transition sidebar-mini">
@@ -61,7 +71,7 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                         Profile
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header"><?php echo $fullname?></span>
+                        <span class="dropdown-header"><?php echo $fullname ?></span>
                         <div class="dropdown-divider"></div>
                         <a href="../p/profilepage.php" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i> Profile
@@ -76,6 +86,7 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
 
                     </div>
                 </li>
+
 
             </ul>
         </nav>
@@ -96,10 +107,10 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1() ?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
@@ -107,93 +118,23 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-               <li class="nav-header">Administrator</li>
-                        <!-- <li class="nav-item">
-                            <a href="Administrator.php" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Add Accounts
+                        <li class="nav-header">Administrator</li>
 
-                                </p>
-                            </a>
-                        </li> -->
                         <li class="nav-item">
-                            <a href="AccountList.php" class="nav-link active">
+                            <a href="AccountList.php" class="nav-link Active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Accounts List
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#THISPLAYALLRECORDSANDDELETEEDITFILES" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    All Records
                                     <!-- <i class="right fas fa-angle-left"></i> -->
-                                </p>
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a href="#NotyetDone" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Receiving, Routing And Mailing
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#NotyetDone" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Administrative Issuance
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#NotyetDone" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Certificate, Authentication and Verification
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#NotyetDone" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Appointment and Clearance and 201 Files
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#NotyetDone" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
-                                <p>
-                                    Numerical
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#NotyetDone" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Communication</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#NotyetDone" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Others</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#NotyetDone" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Manage Queuing
-                                    <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
                         </li>
@@ -211,7 +152,7 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                        <a href='../p/Administrator.php'><button class="btn btn-primary">Add Accounts</button></a>
+                            <a href='../p/Administrator.php'><button class="btn btn-primary">Add Accounts</button></a>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -226,42 +167,46 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
 
             <!-- Main content -->
             <section class="content">
+
                 <div class="row">
+
                     <div class="col-lg-12">
                         <div class="table-responsive">
-                            <table id="example" class="table table-bordered dt-responsive" style="width: 100%;">
-                                <thead>
-                                    <tr>
+                            <div class="container-fluid">
+                                <table id="example" class="table table-bordered dt-responsive" style="width: 100%;">
+                                    <thead>
+                                        <tr>
 
-                                        <!-- <td>Employment No</td> -->
-                                        <td>Photo</td>
-                                        <td style="width: 500px;">Full Name</td>
-                                        <td>View</td>
-                                        <td>Delete</td>
-                                        <td>Edit</td>
+                                            <!-- <td>Employment No</td> -->
+                                            <td>Photo</td>
+                                            <td style="width: 500px;">Full Name</td>
+                                            <td>View</td>
+                                            <td>Delete</td>
+                                            <td>Edit</td>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $student->get_employee() ?>
-                                </tbody>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $student->get_employee() ?>
+                                    </tbody>
 
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
 
-        <footer class="main-footer">
+        <!-- <footer class="main-footer">
             <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div>
             <strong>Copyright &copy; 2014-2021
                 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
             All rights reserved.
-        </footer>
+        </footer> -->
+        <?php include_once('../template/footerclass.php'); ?>
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

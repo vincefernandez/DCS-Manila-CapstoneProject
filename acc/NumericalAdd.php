@@ -1,9 +1,12 @@
 <?php
 include_once('../app/class.php');
 include_once('../template/header.php');
-$ID = $_GET['Add'];
+// $ID = $_GET['Add'];
 // print_r($ID);
-if ($_SESSION['Account_Type'] !== 'NumericalCommunication') {
+session_start();
+$fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'NumericalCommunication' AND ($_SESSION['Account_Type'] !== 'NumericalOthers')) {
+
 
     header('location: ../p/403.php');
 }
@@ -88,10 +91,10 @@ $student->UpdateNumericalRecords();
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1() ?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
@@ -120,18 +123,32 @@ $student->UpdateNumericalRecords();
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     All Records
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
+
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="Numerical.php" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tree"></i>
                                 <p>
-                                    Add Records
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                    Numerical
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="NumericallistRecords.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Communication</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="NumericalOthersRecords.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Others</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
 
@@ -172,7 +189,7 @@ $student->UpdateNumericalRecords();
 
                     <form action="NumericalAdd.php" method="POST" enctype="multipart/form-data">
                         <?php if (isset($_GET['Add'])) {
-
+                            $ID = $_GET['Add'];
                             $Edit = $_GET['Add'];
                             $getUsers = $pdo->prepare("SELECT * FROM filesrecord where Files_ID =$Edit");
                             $getUsers->execute();
@@ -182,8 +199,8 @@ $student->UpdateNumericalRecords();
                             <div class="user-details-add-record">
                                 <div class="input-box-add-record">
                                     <span class="add-record-details">Release number</span>
-                                    <input type="hidden" name="ID" value="<?php echo $ID?>" required>
-                                    <input type="text" name="Release_Number" value="<?php echo "$user[Release_Number]";?>" required>
+                                    <input type="hidden" name="ID" value="<?php echo $ID ?>" required>
+                                    <input type="text" name="Release_Number" value="<?php echo "$user[Release_Number]"; ?>" required>
                                 </div>
 
                             </div>
@@ -257,7 +274,7 @@ $student->UpdateNumericalRecords();
                                 </label>
                             </div> -->
                                 <div class="button-for-uploads" style="float: right !important;">
-                                    <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                    <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                                     <button class="add-record-button rounded-add-record-button" type="submit" name="NumericalUpdate">Submit</button>
                                 </div>
                             </div>
@@ -285,7 +302,7 @@ $student->UpdateNumericalRecords();
 
     <footer class="main-footer">
 
-        <strong>Copyright &copy; 2014-2021
+        <strong>Copyright &copy; 2021-2022
             <a href="#">Cerberus</a>Capstone Psadasroject</strong> All rights reserved.
     </footer>
 

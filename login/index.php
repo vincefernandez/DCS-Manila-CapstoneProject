@@ -4,64 +4,65 @@ session_start();
 $student->loginUser();
 
 
-if ($_SESSION['Account_Type'] == 'Admin') {
-?>
-  <script type="text/javascript">
-    window.location.href = "../p/administrator.php";
-    alert("You must log out first");
-  </script>
-<?php
-  // header('location: ../p/administrator.php');
-}
-if ($_SESSION['Account_Type'] == 'AC') {
-  ?>
-  <script type="text/javascript">
-    window.location.href = "../acc/AppointmentClearance.php";
-    alert("You must log out first");
-  </script>
-<?php
+// if ($_SESSION['Account_Type'] == 'Admin') {
+// ?>
+   <script type="text/javascript">
+//     window.location.href = "../p/administrator.php";
+//     alert("You must log out first");
+//   </script>
+ <?php
 
-}
-if ($_SESSION['Account_Type'] == 'RRMElementary') {
-  ?>
-  <script type="text/javascript">
-    window.location.href = "../acc/RRM.php";
-    alert("You must log out first");
-  </script>
-<?php
-}
-if ($_SESSION['Account_Type'] == 'NumericalOthers') {
-  ?>
-  <script type="text/javascript">
-    window.location.href = "../acc/NumericalOthers.php";
-    alert("You must log out first");
-  </script>
-<?php
-}
-if ($_SESSION['Account_Type'] == 'NumericalCommunication') {
-  ?>
-  <script type="text/javascript">
-    window.location.href = "../acc/Numerical.php";
-    alert("You must log out first");
-  </script>
-<?php
-}
-if ($_SESSION['Account_Type'] == 'CAV') {
-  ?>
-  <script type="text/javascript">
-    window.location.href = "../acc/CAV.php";
-    alert("You must log out first");
-  </script>
-<?php
-}
-if ($_SESSION['Account_Type'] == 'AdministrativeIssuance') {
-  ?>
-  <script type="text/javascript">
-    window.location.href = "../acc/AdministrativeIssuance.php";
-    alert("You must log out first");
-  </script>
-<?php
-}
+
+// }
+// if ($_SESSION['Account_Type'] == 'AC') {
+//   ?>
+   <script type="text/javascript">
+//     window.location.href = "../acc/AppointmentClearance.php";
+//     alert("You must log out first");
+//   </script>
+ <?php
+
+// }
+// if ($_SESSION['Account_Type'] == 'RRMElementary') {
+//   ?>
+   <script type="text/javascript">
+//     window.location.href = "../acc/RRM.php";
+//     alert("You must log out first");
+//   </script>
+ <?php
+// }
+// if ($_SESSION['Account_Type'] == 'NumericalOthers') {
+//   ?>
+   <script type="text/javascript">
+//     window.location.href = "../acc/NumericalOthers.php";
+//     alert("You must log out first");
+//   </script>
+ <?php
+// }
+// if ($_SESSION['Account_Type'] == 'NumericalCommunication') {
+//   ?>
+   <script type="text/javascript">
+//     window.location.href = "../acc/Numerical.php";
+//     alert("You must log out first");
+//   </script>
+ <?php
+// }
+// if ($_SESSION['Account_Type'] == 'CAV') {
+//   ?>
+   <script type="text/javascript">
+//     window.location.href = "../acc/CAV.php";
+//     alert("You must log out first");
+//   </script>
+ <?php
+// }
+// if ($_SESSION['Account_Type'] == 'AdministrativeIssuance') {
+//   ?>
+   <script type="text/javascript">
+//     window.location.href = "../acc/AdministrativeIssuance.php";
+//     alert("You must log out first");
+//   </script>
+ <?php
+// }
 ?>
 
 <!DOCTYPE html>

@@ -3,7 +3,7 @@ include_once('../app/class.php');
 include_once('../template/header.php');
 session_start();
 $fullname = $_SESSION['FullName'];
-$ID = $_GET['Add'];
+// $ID = $_GET['Add'];
 // print_r($ID);
 if ($_SESSION['Account_Type'] !== 'AC') {
 
@@ -90,10 +90,10 @@ $student->UpdateAppointmentClearance();
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            <img src="<?php $student->view1() ?>" class="img-circle elevation-2" alt="User Image" />
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?php echo $fullname ?></a>
+            <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
           </div>
         </div>
 
@@ -127,11 +127,11 @@ $student->UpdateAppointmentClearance();
               </a>
             </li>
             <li class="nav-item">
-              <a href="AppointmentClearance.php" class="nav-link active">
+              <a href="AppointmentClearanceRecords.php" class="nav-link ">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                  Add Records
-
+                  Appointment and Clearance and 201 Files Records
+                  <!-- <i class="right fas fa-angle-left"></i> -->
                 </p>
               </a>
             </li>
@@ -174,7 +174,7 @@ $student->UpdateAppointmentClearance();
 
           <form action="../acc/AppointmentClearanceAdd.php" method="POST" enctype="multipart/form-data">
             <?php if (isset($_GET['Add'])) {
-
+              $ID = $_GET['Add'];
               $Edit = $_GET['Add'];
               $getUsers = $pdo->prepare("SELECT * FROM filesrecord where Files_ID =$Edit");
               $getUsers->execute();
@@ -240,7 +240,7 @@ $student->UpdateAppointmentClearance();
                   </label>
                 </div> -->
                 <div class="button-for-uploads" style="float: right !important;">
-                  <button class="add-record-button rounded-add-record-button" type="submit" value="submit" disabled>Reset</button>
+                  <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit" disabled>Reset</button> -->
                   <button class="add-record-button rounded-add-record-button" type="submit" name="AppointmentClearanceUpdate">Submit</button>
                 </div>
               </div>
@@ -268,7 +268,7 @@ $student->UpdateAppointmentClearance();
 
   <footer class="main-footer">
 
-    <strong>Copyright &copy; 2014-2021
+    <strong>Copyright &copy; 2021-2022
       <a href="#">Cerberus</a>Capstone Psadasroject</strong> All rights reserved.
   </footer>
 

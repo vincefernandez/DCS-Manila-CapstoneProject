@@ -101,10 +101,10 @@ if ($_SESSION['Account_Type'] !== 'RRMElementary') {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
@@ -126,9 +126,18 @@ if ($_SESSION['Account_Type'] !== 'RRMElementary') {
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                        <li class="nav-header">Receiving Routing and Mailing</li>
+               <li class="nav-header">Receiving Routing and Mailing</li>
                         <li class="nav-item">
-                            <a href="RRMlist.php" class="nav-link active">
+                            <a href="RRMElementaryQueueing.php" class="nav-link ">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Queuing
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="RRMlist.php" class="nav-link Active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     All Records
@@ -136,15 +145,57 @@ if ($_SESSION['Account_Type'] !== 'RRMElementary') {
                                 </p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="RRM.php" class="nav-link ">
+
+                        <li class="nav-item">
+                            <a href="RRMAdministrative.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Add Records
-
+                                    Administrative Issuance
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
-                        </li> -->
+                        </li>
+                        <li class="nav-item">
+                            <a href="CAVRRM.php" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Certification Authentication Verification
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#NotYetDone" class="nav-link">
+                                <i class="nav-icon fas fa-tree"></i>
+                                <p>
+                                    Numerical
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="RRMNumerical.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Communication</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="RRMNumericalOthers.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Others</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="201FilesRRM.php" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Appointment and Clearance / 201 FIles
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
 
                     </ul>
                 </nav>
@@ -181,25 +232,26 @@ if ($_SESSION['Account_Type'] !== 'RRMElementary') {
                         <thead>
                             <tr>
 
+                                <th>Release</th>
                                 <th>Action</th>
                                 <th>Control Number</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Middle_Name</th>
+                                <th>Middle Name</th>
                                 <th>Suffix</th>
                                 <th>Document Type</th>
                                 <th>Release Number</th>
                                 <th>Source</th>
                                 <th>Document Status</th>
-                                <th>Purpose</th>
+                                <th>For Release</th>
                                 <th>Classification Number</th>
                                 <th>District</th>
                                 <th>Academic</th>
                                 <th>Year</th>
                                 <th>Grade Level</th>
-                                <th>CAV_ID</th>
-                                <th>Date_Administrative</th>
-                                <th>Memorandum_Number</th>
+                                <th>CAV ID</th>
+                                <th>Date Administrative</th>
+                                <th>Memorandum Number</th>
                                 <th>File</th>
                                 <th>Date</th>
 

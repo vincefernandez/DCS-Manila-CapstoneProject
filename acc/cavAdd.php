@@ -3,12 +3,12 @@ include_once('../app/class.php');
 include_once('../template/header.php');
 session_start();
 $fullname = $_SESSION['FullName'];
-$ID = $_GET['Add'];
+
 // print_r($ID);
-if ($_SESSION['Account_Type'] !== 'AC') {
+if ($_SESSION['Account_Type'] !== 'CAV') {
 
     header('location: ../p/403.php');
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -91,10 +91,10 @@ $student->UpdateCAV();
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1() ?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
@@ -116,10 +116,10 @@ $student->UpdateCAV();
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-header">
-                            <h1 class="small">Numerical</h1>
+                            <h1 class="small">Certification Authentication Verification</h1>
                         </li>
                         <li class="nav-item">
-                            <a href="Cav.php" class="nav-link ">
+                            <a href="cavList.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     All Records
@@ -128,10 +128,10 @@ $student->UpdateCAV();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="Numerical.php" class="nav-link active">
+                            <a href="CavRecords.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Add Records
+                                    Certification, Authentication Verification
                                     <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
@@ -158,7 +158,7 @@ $student->UpdateCAV();
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="Numericallist.php">All Records</a></li> -->
-                                <li class="breadcrumb-item active">Edit record</li>
+                                <li class="breadcrumb-item active">Add Record</li>
                             </ol>
                         </div>
                     </div>
@@ -175,7 +175,7 @@ $student->UpdateCAV();
 
                     <form action="cavAdd.php" method="POST" enctype="multipart/form-data">
                         <?php if (isset($_GET['Add'])) {
-
+                            $ID = $_GET['Add'];
                             $Edit = $_GET['Add'];
                             $getUsers = $pdo->prepare("SELECT * FROM filesrecord where Files_ID =$Edit");
                             $getUsers->execute();
@@ -259,7 +259,7 @@ $student->UpdateCAV();
                                 </label>
                             </div> -->
                                 <div class="button-for-uploads" style="float: right !important;">
-                                    <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                    <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                                     <button class="add-record-button rounded-add-record-button" type="submit" name="cavUpdate">Submit</button>
                                 </div>
                             </div>
@@ -271,7 +271,7 @@ $student->UpdateCAV();
         </div>
         <footer class="main-footer">
 
-            <strong>Copyright &copy; 2014-2021
+            <strong>Copyright &copy; 2021-2022
                 <a href="#">Cerberus</a>Capstone Psadasroject</strong> All rights reserved.
         </footer>
     </div>

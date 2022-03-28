@@ -3,6 +3,7 @@ include_once('../app/class.php');
 include_once('../template/header.php');
 $ID = $_GET['Add'];
 // print_r($ID);
+session_start();
 if ($_SESSION['Account_Type'] !== 'RRMElementary') {
 
     header('location: ../p/403.php');
@@ -207,7 +208,7 @@ $student->UpdateRRM();
                                 </label>
                             </div> -->
                                 <div class="button-for-uploads" style="float: right !important;">
-                                    <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                    <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                                     <button class="add-record-button rounded-add-record-button" type="submit" name="RRMUpdate">Submit</button>
                                 </div>
                             </div>

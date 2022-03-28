@@ -2,10 +2,17 @@
 include_once('../app/class.php');
 // $student->AddAccounts();
 session_start();
+$ID = $_SESSION['ID'];
+// print_r($ID);
 $Employee_ID = $_SESSION['login'];
 $fullname = $_SESSION['FullName'];
 // print_r($Employee_ID);
+// uniqid();
+// echo uniqid();
+if ($_SESSION['Account_Type'] == null) {
 
+    header('location: ../p/403.php');
+}
 $student->Fileupload1();
 ?>
 
@@ -29,7 +36,7 @@ $student->Fileupload1();
 
 
     <!-- Modified and overide style -->
-    <link rel="stylesheet" href="../dist/css/wyrlo.css">
+    <link rel="stylesheet" href="../dist/css/wyrlo1.css">
     <!-- Ions Icon style -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
@@ -99,7 +106,7 @@ $student->Fileupload1();
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1();?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
                         <a href="../p/profilepage.php" class="d-block"><?php echo $fullname; ?></a>
@@ -167,8 +174,8 @@ $student->Fileupload1();
                                         <div class="button-for-uploads1">
                                             <!--CHANGE THIS CLASS DONT GENERALIZE ALL FORM -->
                                             <form method='post' action='profilepage.php' enctype='multipart/form-data'>
-                                                <input type='file' name='files[]' class="form-control text-center" style="text-decoration: none !important;" multiple />
-                                                <input type='submit' value='Submit' name='Fileupload' class="form-control" />
+                                                <input type='file' name='files[]' class=" text-center" multiple />
+                                                <input type='submit' value='Submit' name='Fileupload' />
 
                                             </form>
                                         </div>

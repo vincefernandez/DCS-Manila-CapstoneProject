@@ -5,7 +5,7 @@ $fullname = $_SESSION['FullName'];
 if ($_SESSION['Account_Type'] !== 'AC') {
 
     header('location: ../p/403.php');
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -70,20 +70,17 @@ if ($_SESSION['Account_Type'] !== 'AC') {
                         Profile
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header"><?php echo $fullname ?></span>
+                        <span class="dropdown-header"><?php echo $fullname; ?></span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Profile
+                        <a href="../p/profilepage.php" class="dropdown-item">
+                            <i class="fas fa-user mr-2"></i> Profile
 
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> Settings
 
-                        </a>
                         <div class="dropdown-divider"></div>
                         <a href="../app/logout.php" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> Logout
+                            <!-- <i class="fas fa-file mr-2"></i> -->
+                            <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
                         </a>
 
@@ -108,10 +105,10 @@ if ($_SESSION['Account_Type'] !== 'AC') {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1() ?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname; ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname; ?></a>
                     </div>
                 </div>
 
@@ -135,7 +132,6 @@ if ($_SESSION['Account_Type'] !== 'AC') {
                         <li class="nav-header">
                             <h1 class="small">Appointment and Clearances / 201 Files</h1>
                         </li>
-                        </li>
                         <li class="nav-item">
                             <a href="AppointmentClearancelist.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -145,16 +141,15 @@ if ($_SESSION['Account_Type'] !== 'AC') {
                                 </p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="AppointmentClearance.php" class="nav-link">
+                        <li class="nav-item">
+                            <a href="AppointmentClearanceRecords.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Add Records
-
+                                    Appointment and Clearance and 201 Files Records
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
-                        </li> -->
-
+                        </li>
                     </ul>
                 </nav>
 
@@ -190,11 +185,11 @@ if ($_SESSION['Account_Type'] !== 'AC') {
                         <thead>
                             <tr>
 
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                                 <th>Control Number</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Middle_Name</th>
+                                <th>Middle Name</th>
                                 <th>Suffix</th>
                                 <th>Document Type</th>
                                 <th>Release Number</th>
@@ -206,9 +201,9 @@ if ($_SESSION['Account_Type'] !== 'AC') {
                                 <th>Academic</th>
                                 <th>Year</th>
                                 <th>Grade Level</th>
-                                <th>CAV_ID</th>
-                                <th>Date_Administrative</th>
-                                <th>Memorandum_Number date</th>
+                                <th>CAV ID</th>
+                                <th>Date Administrative</th>
+                                <th>Memorandum Number date</th>
                                 <th>File</th>
                                 <th>Date</th>
 
@@ -229,7 +224,7 @@ if ($_SESSION['Account_Type'] !== 'AC') {
 
         <footer class="main-footer">
             <!-- <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div> -->
-            <strong>Copyright &copy; 2014-2021
+            <strong>Copyright &copy; 2021-2022
                 <a href="#">Cerberus</a>Capstone Project</strong> All rights reserved.
         </footer>
 

@@ -88,10 +88,10 @@ $student->NumericalAddRecords();
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
@@ -112,8 +112,8 @@ $student->NumericalAddRecords();
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-header">
-                            <h1 class="small">Numerical</h1>
+               <li class="nav-header">
+                            <h5 class="">Numerical</h5>
                         </li>
                         <li class="nav-item">
                             <a href="numericalOtherslist.php" class="nav-link ">
@@ -124,15 +124,29 @@ $student->NumericalAddRecords();
                                 </p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="NumericalOthers.php" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tree"></i>
                                 <p>
-                                    Add Records
-
+                                    Numerical
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                        </li> -->
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="NumericallistRecords.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Communication</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="NumericalOthersRecords.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Others</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
 
                     </ul>
@@ -244,11 +258,11 @@ $student->NumericalAddRecords();
                             <div class="button-for-uploads">
 
                                 <label class="button-for-select">Select file
-                                    <input type="file" name="file" id="file" /></td>
+                                    <input type="file" name="file" id="file"  required/></td>
                                 </label>
                             </div>
                             <div class="button-for-uploads" style="float: right !important;">
-                                <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                                 <button class="add-record-button rounded-add-record-button" type="submit" name="NumericalSubmit">Submit</button>
                             </div>
                         </div>

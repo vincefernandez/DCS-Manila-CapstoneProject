@@ -88,10 +88,10 @@ $student->CAVAddRecords();
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1();?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname; ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname; ?></a>
                     </div>
                 </div>
 
@@ -120,6 +120,15 @@ $student->CAVAddRecords();
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     All Records
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="CavRecords.php" class="nav-link ">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Certification, Authentication Verification
                                     <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
@@ -174,7 +183,7 @@ $student->CAVAddRecords();
                         <div class="user-details-add-record">
                             <div class="input-box-add-record">
                                 <span class="add-record-details">Cav ID</span>
-                                <input type="text" name="Cav_ID" placeholder="Enter Cav_ID" required>
+                                <input type="text" name="Cav_ID" placeholder="Enter Cav_ID">
                             </div>
                             <!--END OF DIV-->
                         </div>
@@ -244,11 +253,11 @@ $student->CAVAddRecords();
                             <div class="button-for-uploads">
 
                                 <label class="button-for-select">Select file
-                                    <input type="file" name="file" id="file" /></td>
+                                    <input type="file" name="file" id="file" required /></td>
                                 </label>
                             </div>
                             <div class="button-for-uploads" style="float: right !important;">
-                                <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                                 <button class="add-record-button rounded-add-record-button" type="submit" name="CAVSubmit">Submit</button>
                             </div>
                         </div>
@@ -275,7 +284,7 @@ $student->CAVAddRecords();
 
     <footer class="main-footer">
 
-        <strong>Copyright &copy; 2014-2021
+        <strong>Copyright &copy;2021-2022
             <a href="#">Cerberus</a>Capstone Psadasroject</strong> All rights reserved.
     </footer>
 

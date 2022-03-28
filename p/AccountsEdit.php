@@ -3,10 +3,11 @@ include_once('../app/class.php');
 // $student->AddAccounts();
 $ID = $_GET['Edit'];
 
-if($ID === null) {
-    echo"";
+if ($ID === null) {
+    echo "";
 }
-
+session_start();
+$fullname = $_SESSION['FullName'];
 if ($_SESSION['Account_Type'] !== 'Admin') {
 
     header('location: ../p/403.php');
@@ -45,138 +46,44 @@ $student->UpdateAccounts();
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="Administrator.php" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
+
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
+
 
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle" />
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted">
-                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted">
-                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted">
-                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
+
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="../p/profilepage.php">
+                        <i class="far fa-user"></i>
+                        Profile
                     </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-header"><?php echo $fullname ?></span>
+                        <div class="dropdown-divider"></div>
+                        <a href="../p/profilepage.php" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> Profile
+
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a href="../app/logout.php" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> Logout
+
+                        </a>
+
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -197,10 +104,10 @@ $student->UpdateAccounts();
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">First Name Last Name</a>
+                        <a href="#" class="d-block"><?php echo $fullname?></a>
                     </div>
                 </div>
 
@@ -325,12 +232,12 @@ $student->UpdateAccounts();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Blank Page</h1>
+                            <!-- <h1>Blank Page</h1> -->
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Blank Page</li>
+                                <li class="breadcrumb-item"><a href="../p/AccountList.php">All Accounts</a></li>
+                                <li class="breadcrumb-item active">Edit Accounts Records</li>
                             </ol>
                         </div>
                     </div>
@@ -353,128 +260,128 @@ $student->UpdateAccounts();
 
                                 <form method="POST" action="AccountsEdit.php">
 
-                                <?php if (isset($_GET['Edit'])) {
+                                    <?php if (isset($_GET['Edit'])) {
 
-                                    $Edit = $_GET['Edit'];
-                                    $getUsers = $pdo->prepare("SELECT * FROM users_tbl where Employee_No = '$Edit'");
-                                    $getUsers->execute();
-                                    $users = $getUsers->fetchAll();
-                                    foreach ($users as $user) {
+                                        $Edit = $_GET['Edit'];
+                                        $getUsers = $pdo->prepare("SELECT * FROM users_tbl where Employee_No = '$Edit'");
+                                        $getUsers->execute();
+                                        $users = $getUsers->fetchAll();
+                                        foreach ($users as $user) {
 
 
                                     ?>
 
-                                    <div class="card">
-                                        <div class="row" style="background-color:#ffdd99">
+                                            <div class="card">
+                                                <div class="row" style="background-color:#ffdd99">
 
 
-                                            <div class="col-8">
-                                                <div class="mb-3">
-                                                    <!-- <label class="form-label">Employee No.</label> -->
-                                                    <input type="hidden" class="form-control" name="Employee_No" value="<?php echo"$ID"?>" />
-                                                    <label class="form-label">Employee No.</label>
-                                                    <input type="text" class="form-control" name="Employee_No" value="<?php echo"$user[Employee_No]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" name="First_Name" value="<?php echo"$user[First_Name]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Middle Name</label>
-                                                    <input type="text" class="form-control" name="Middle_Name" value="<?php echo"$user[Middle_Name]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" name="Last_Name" value="<?php echo"$user[Last_Name]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Suffix</label>
-                                                    <input type="text" class="form-control" name="Suffix" value="<?php echo"$user[Suffix]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Birth Date</label>
-                                                    <input type="text" class="form-control" name="Birth_Date" value="<?php echo"$user[Date_Birth]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Age</label>
-                                                    <input type="text" class="form-control" name="Age" value=" <?php echo"$user[Age]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Position</label>
-                                                    <input type="text" class="form-control" name="Position" value="<?php echo"$user[Position]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Employment Date</label>
-                                                    <input type="text" class="form-control" name="Employment_Date" value="<?php echo"$user[Employment_Date]";?>" >
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                                    <input type="email" class="form-control" name="Email" value="<?php echo"$user[Email]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Password</label>
-                                                    <input type="password" class="form-control" name="Password" value="<?php echo"$user[Password]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Contact Number</label>
-                                                    <input type="text" class="form-control" name="Contact_Number" value="<?php echo"$user[Contact_Number]";?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Account Type</label>
-                                                    <select class="form-select form-control" name="Account_Type">
-                                                        <option selected disabled><?php echo "$user[Account_Type]";?></option>
-                                                        <option value="RRMElementary">Receing Routing And Mailing / Elementary</option>
-                                                        <option value="RRMHighSchool">Receing Routing And Mailing / High School</option>
-                                                        <option value="AdministrativeIssuance">Administrative Issuance</option>
-                                                        <option value="CAV">Certification, Authentication and Verification</option>
-                                                        <option value="NumericalCommunication">Numerical Files / Communication</option>
-                                                        <option value="NumericalOthers">Numerical Files / Others </option>
-                                                        <option value="AC">Appointment and Clearances / 201 Files</option>
+                                                    <div class="col-8">
+                                                        <div class="mb-3">
+                                                            <!-- <label class="form-label">Employee No.</label> -->
+                                                            <input type="hidden" class="form-control" name="Employee_No" value="<?php echo "$ID" ?>" />
+                                                            <label class="form-label">Employee No.</label>
+                                                            <input type="text" class="form-control" name="Employee_No" value="<?php echo "$user[Employee_No]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">First Name</label>
+                                                            <input type="text" class="form-control" name="First_Name" value="<?php echo "$user[First_Name]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Middle Name</label>
+                                                            <input type="text" class="form-control" name="Middle_Name" value="<?php echo "$user[Middle_Name]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                                                            <input type="text" class="form-control" name="Last_Name" value="<?php echo "$user[Last_Name]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Suffix</label>
+                                                            <input type="text" class="form-control" name="Suffix" value="<?php echo "$user[Suffix]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Birth Date</label>
+                                                            <input type="text" class="form-control" name="Birth_Date" value="<?php echo "$user[Date_Birth]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Age</label>
+                                                            <input type="text" class="form-control" name="Age" value=" <?php echo "$user[Age]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Position</label>
+                                                            <input type="text" class="form-control" name="Position" value="<?php echo "$user[Position]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Employment Date</label>
+                                                            <input type="text" class="form-control" name="Employment_Date" value="<?php echo "$user[Employment_Date]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                                            <input type="email" class="form-control" name="Email" value="<?php echo "$user[Email]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Password</label>
+                                                            <input type="password" class="form-control" name="Password" value="<?php echo "$user[Password]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Contact Number</label>
+                                                            <input type="text" class="form-control" name="Contact_Number" value="<?php echo "$user[Contact_Number]"; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Account Type</label>
+                                                            <select class="form-select form-control" name="Account_Type">
+                                                                <option selected disabled><?php echo "$user[Account_Type]"; ?></option>
+                                                                <option value="RRMElementary">Receing Routing And Mailing / Elementary</option>
+                                                                <option value="RRMHighSchool">Receing Routing And Mailing / High School</option>
+                                                                <option value="AdministrativeIssuance">Administrative Issuance</option>
+                                                                <option value="CAV">Certification, Authentication and Verification</option>
+                                                                <option value="NumericalCommunication">Numerical Files / Communication</option>
+                                                                <option value="NumericalOthers">Numerical Files / Others </option>
+                                                                <option value="AC">Appointment and Clearances / 201 Files</option>
 
 
-                                                    </select>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-right">
+                                                        <button type="Submit" name="UpdateAccount" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                        <button type="ResetSubmit" class="btn btn-danger">
+                                                            Reset
+                                                        </button>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-right">
-                                                <button type="Submit" name="UpdateAccount" class="btn btn-primary">
-                                                    Submit
-                                                </button>
-                                                <button type="ResetSubmit" class="btn btn-danger">
-                                                    Reset
-                                                </button>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
                             </div>
                             </form>
-                            <?php }
-                            }?>
+                    <?php }
+                                    } ?>
                         </div>
 
                     </div>

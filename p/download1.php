@@ -75,7 +75,9 @@
 	{
 	$buffer = fread($file, $chunksize);
 	print($buffer);
+
 	flush();
+	readfile($buffer);
 	$bytes_send += strlen($buffer);
 	}
 	fclose($file);

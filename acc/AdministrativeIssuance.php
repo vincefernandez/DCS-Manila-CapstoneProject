@@ -51,20 +51,17 @@ $student->AdministrativeIssuanceAddRecords();
             Profile
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-header"><?php echo " $fullname"; ?></span>
+            <span class="dropdown-header"><?php echo $fullname; ?></span>
             <div class="dropdown-divider"></div>
             <a href="../p/profilepage.php" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> Profile
+              <i class="fas fa-user mr-2"></i> Profile
 
             </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> Settings
 
-            </a>
             <div class="dropdown-divider"></div>
             <a href="../app/logout.php" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> Logout
+              <!-- <i class="fas fa-file mr-2"></i> -->
+              <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
             </a>
 
@@ -89,10 +86,10 @@ $student->AdministrativeIssuanceAddRecords();
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?php echo $fullname ?></a>
+            <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
           </div>
         </div>
 
@@ -151,7 +148,7 @@ $student->AdministrativeIssuanceAddRecords();
           <div class="row mb-2">
             <div class="col-sm-6">
               <!-- Change This -->
-              <a href='' class="text-secondary"><i class="fas fa-arrow-left fa-2x"></i></a>
+              <a href='Administrativeissuancelist.php' class="text-secondary"><i class="fas fa-arrow-left fa-2x"></i></a>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -224,23 +221,23 @@ $student->AdministrativeIssuanceAddRecords();
               <!--END OF DIV-->
             </div>
             <div class="upload-add-record mb-2">
-              <input type="file" name="file" id="file" /></td>
+              <input type="file" name="file" id="file"  required/></td>
             </div>
             <div class="button-for-uploads">
-              <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+              <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
               <button class="add-record-button rounded-add-record-button" type="submit" name="AdministrativeIssuanceSubmit">Submit</button>
             </div>
         </div>
         </form>
       </section>
+      <footer class="main-footer">
 
-    </div>
-    <!--END OF CONTAINER-->
-    <footer class="main-footer">
-      <!-- <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div> -->
-      <strong>Copyright &copy; 2014-2021
+      <strong>Copyright &copy; 2021-2022
         <a href="#">Cerberus</a>Capstone Project</strong> All rights reserved.
     </footer>
+    </div>
+    <!--END OF CONTAINER-->
+
   </div>
 
 

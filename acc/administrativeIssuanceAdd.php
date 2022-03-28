@@ -1,12 +1,14 @@
 <?php
 include_once('../app/class.php');
 include_once('../template/header.php');
-$ID = $_GET['Add'];
-print_r($ID);
-// if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
 
-//     header('location: ../p/403.php');
-//   }
+// print_r($ID);
+session_start();
+$fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
+
+    header('location: ../p/403.php');
+}
 ?>
 
 
@@ -47,17 +49,14 @@ print_r($ID);
                         <span class="dropdown-header"><?php echo $fullname; ?></span>
                         <div class="dropdown-divider"></div>
                         <a href="../p/profilepage.php" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Profile
+                            <i class="fas fa-user mr-2"></i> Profile
 
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> Settings
 
-                        </a>
                         <div class="dropdown-divider"></div>
                         <a href="../app/logout.php" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> Logout
+                            <!-- <i class="fas fa-file mr-2"></i> -->
+                            <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
                         </a>
 
@@ -82,10 +81,10 @@ print_r($ID);
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
@@ -148,7 +147,7 @@ print_r($ID);
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="Administrativeissuancelist.php">All Records</a></li> -->
-                                <li class="breadcrumb-item active">Edit record</li>
+                                <li class="breadcrumb-item active">Edit Record</li>
                             </ol>
                         </div>
                     </div>
@@ -165,7 +164,7 @@ print_r($ID);
 
                     <form action="AdministrativeIssuanceAdd.php" method="post" enctype="multipart/form-data">
                         <?php if (isset($_GET['Add'])) {
-
+                            $ID = $_GET['Add'];
                             $Edit = $_GET['Add'];
                             $getUsers = $pdo->prepare("SELECT * FROM filesrecord where Files_ID =$Edit");
                             $getUsers->execute();
@@ -177,7 +176,7 @@ print_r($ID);
                             <div class="user-details-add-record">
                                 <div class="input-box-add-record">
                                     <span class="add-record-details">Control number</span>
-                                    <input type="hidden" name="ID" value="<?php echo $ID?>">
+                                    <input type="hidden" name="ID" value="<?php echo $ID ?>">
                                     <input type="text" name="Control_Number" value="<?php echo "$user[Control_Number]"; ?>">
                                 </div>
 
@@ -216,7 +215,7 @@ print_r($ID);
                             </div>
 
                             <div class="button-for-uploads">
-                                <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                                 <button class="add-record-button rounded-add-record-button" type="submit" name="AdministrativeIssuanceUpdate">Submit</button>
                             </div>
                 </div>

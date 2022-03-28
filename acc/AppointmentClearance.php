@@ -107,10 +107,10 @@ $student->AppointmentCLearanceAddRecords();
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?php echo $fullname ?></a>
+            <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
           </div>
         </div>
 
@@ -139,6 +139,15 @@ $student->AppointmentCLearanceAddRecords();
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   All Records
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="AppointmentClearanceRecords.php" class="nav-link ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Appointment and Clearance and 201 Files Records
                   <!-- <i class="right fas fa-angle-left"></i> -->
                 </p>
               </a>
@@ -266,11 +275,11 @@ $student->AppointmentCLearanceAddRecords();
               <div class="button-for-uploads">
 
                 <label class="button-for-select">Select file
-                  <input type="file" name="file" id="file" /></td>
+                  <input type="file" name="file" id="file"  required/></td>
                 </label>
               </div>
               <div class="button-for-uploads" style="float: right !important;">
-                <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
                 <button class="add-record-button rounded-add-record-button" type="submit" name="AppointmentClearanceSubmit">Submit</button>
               </div>
             </div>

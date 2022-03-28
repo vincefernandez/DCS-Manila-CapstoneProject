@@ -2,10 +2,12 @@
 include_once('../app/class.php');
 session_start();
 $fullname = $_SESSION['FullName'];
-if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
+if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance'){
 
     header('location: ../p/403.php');
   }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -109,10 +111,10 @@ if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname; ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname; ?></a>
                     </div>
                 </div>
 
@@ -172,12 +174,12 @@ if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <!-- Change This -->
-                            <!-- <h1>Name Per Page</h1> -->
+                            <!-- <a href='../acc/AdministrativeIssuance.php'><button class="btn btn-primary">Add Record</button></a> -->
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="AdministrativeIssuance.php">Add Record</a></li> -->
-                                <li class="breadcrumb-item active">All Records</li>
+                                <li class="breadcrumb-item active">Administrative Issuance Records</li>
                             </ol>
                         </div>
                     </div>
@@ -220,6 +222,7 @@ if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
                 </div>
             </section>
 
+
         </div>
 
 
@@ -228,7 +231,6 @@ if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
             <strong>Copyright &copy; 2014-2021
                 <a href="#">Cerberus</a>Capstone Project</strong> All rights reserved.
         </footer>
-
 
         <aside class="control-sidebar control-sidebar-dark">
             <div>

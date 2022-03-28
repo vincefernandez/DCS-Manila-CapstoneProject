@@ -1,13 +1,14 @@
 <?php
 include_once('../app/class.php');
 include_once('../template/header.php');
-
-$ID = $_GET['Add'];
-print_r($ID);
-if ($_SESSION['Account_Type'] !== 'AC') {
+// $ID = $_GET['Add'];
+// print_r($ID);
+session_start();
+$fullname = $_SESSION['FullName'];
+if ($_SESSION['Account_Type'] !== 'RRMElementary') {
 
     header('location: ../p/403.php');
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ if ($_SESSION['Account_Type'] !== 'AC') {
 
 
 <?php
-$student->UpdateAppointmentClearance();
+$student->UpdateRRM();
 ?>
 
 <body class="hold-transition sidebar-mini fixed-position">
@@ -38,7 +39,9 @@ $student->UpdateAppointmentClearance();
                 <!-- Navbar Search -->
 
 
+                <!-- Messages Dropdown Menu -->
 
+                <!-- Notifications Dropdown Menu -->
 
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -52,20 +55,17 @@ $student->UpdateAppointmentClearance();
                         Profile
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header"><?php echo $fullname ?></span>
+                        <span class="dropdown-header"><?php echo $fullname; ?></span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Profile
+                        <a href="../p/profilepage.php" class="dropdown-item">
+                            <i class="fas fa-user mr-2"></i> Profile
 
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> Settings
 
-                        </a>
                         <div class="dropdown-divider"></div>
                         <a href="../app/logout.php" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> Logout
+                            <!-- <i class="fas fa-file mr-2"></i> -->
+                            <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
                         </a>
 
@@ -78,56 +78,40 @@ $student->UpdateAppointmentClearance();
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../index3.html" class="brand-link">
+            <div href="../index3.html" class="brand-link">
                 <img src="../dist/img/dcslogo.png" alt="Record Services Manila" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
                 <h6 class="brand-text font-weight-light h6">
                     Record Services Manila
                 </h6>
-            </a>
+            </div>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1() ?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">First Name Last Name</a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 
-                <!-- SidebarSearch Form -->
-                <!-- <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                        <li class="nav-header">
-                            <h1 class="small">Appointment and Clearances / 201 Files</h1>
-                        </li>
+
+                        <li class="nav-header">Receiving Routing and Mailing</li>
                         <li class="nav-item">
-                            <a href="AppointmentClearancelist.php" class="nav-link ">
+                            <a href="RRMlist.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     All Records
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
+
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="AppointmentClearance.php" class="nav-link active">
+                            <a href="RRM.php" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Add Records
@@ -135,6 +119,8 @@ $student->UpdateAppointmentClearance();
                                 </p>
                             </a>
                         </li>
+
+
 
 
                     </ul>
@@ -156,8 +142,8 @@ $student->UpdateAppointmentClearance();
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="AppointmentClearanceList.php">All Records</a></li>
-                                <li class="breadcrumb-item active">Add record</li>
+                                <li class="breadcrumb-item"><a href="RRMList.php">All Records</a></li>
+                                <li class="breadcrumb-item active">Edit record</li>
                             </ol>
                         </div>
                     </div>
@@ -172,24 +158,25 @@ $student->UpdateAppointmentClearance();
             <section class="add-record-flex-section content">
                 <div class="container-add-record">
 
-                    <form action="../acc/AppointmentClearanceAdd.php" method="POST" enctype="multipart/form-data">
-                        <?php if (isset($_GET['Add'])) {
+                    <form action="RRMrelease.php" method="POST" enctype="multipart/form-data">
+                        <?php if (isset($_GET['Release'])) {
 
-                            $Edit = $_GET['Add'];
-                            $getUsers = $pdo->prepare("SELECT * FROM filesrecord where Files_ID =$Edit");
+                            $Release = $_GET['Release'];
+                            $getUsers = $pdo->prepare("SELECT * FROM filesrecord where Files_ID =$Release");
                             $getUsers->execute();
                             $users = $getUsers->fetchAll();
                             foreach ($users as $user)
                         ?>
-
                             <div class="user-details-add-record">
                                 <div class="input-box-add-record">
-                                    <span class="add-record-details">Relase number</span>
-                                    <input type="text" name="Release_Number" value="<?php echo "$user[Release_Number]"; ?>" readonly>
-                                    <input type="hidden" name="ID" value="<?php echo "$ID"; ?>">
+                                    <span class="add-record-details">Control number</span>
+                                    <input type="hidden" name="ID" value="<?php echo $Release ?>" required>
+                                    <input type="text" name="Control_Number" value="<?php echo "$user[Control_Number]"; ?>" readonly>
                                 </div>
-                                <!--END OF DIV-->
+
                             </div>
+
+
                             <div class="user-details-add-record">
                                 <div class="input-box-add-record">
                                     <span class="add-record-details">First name</span>
@@ -214,87 +201,97 @@ $student->UpdateAppointmentClearance();
                                 </div>
                                 <!--END OF DIV-->
                             </div>
-
-
-
                             <div class="user-details-add-record">
                                 <div class="input-box-add-record">
-                                    <span class="add-record-details">Source</span>
-                                    <input type="text" name="Source" value="<?php echo "$user[Source]"; ?>" readonly>
-                                </div>
-                                <!--END OF DIV-->
-                                <div class="input-box-add-record">
-                                    <span class="add-record-details">Document type</span>
+                                    <span class="add-record-details">Document Type</span>
                                     <input type="text" name="Document_Type" value="<?php echo "$user[Document_Type]"; ?>" readonly>
                                 </div>
-                                <!--END OF DIV-->
                             </div>
-                            <div class="user-details-add-record">
-                                <div class="input-box-add-record">
-                                    <span class="add-record-details ">Document Status</span>
-                                    <select class="select-for-release form-control" name="Document_Status" disabled>
-                                        <option disabled><?php echo "$user[Document_Status]"; ?> </option>
-                                        <option value="Active">Active</option>
-                                        <option value="Not-Active">Not Active</option>
-                                    </select>
-                                </div>
-                                <!--END OF DIV-->
-                                <div class="input-box-add-record">
-                                    <span class="add-record-details ">For release</span>
-                                    <select class="select-for-release form-control" name="Purpose" disabled>
-                                        <option disabled><?php echo "$user[Purpose]"; ?> </option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </div>
-                                <!--END OF DIV-->
-                            </div>
+
                             <div class="user-details-add-record">
                                 <div class="input-box-add-record">
                                     <span class="add-record-details">Date</span>
                                     <input type="date" name="Date" value="<?php echo Date('Y-m-d'); ?>" readonly>
                                 </div>
-                                <!--END OF DIV-->
+
                             </div>
                             <div class="upload-add-record">
-                                <!-- <div class="button-for-uploads">
+                                <div class="button-for-uploads">
 
-                  <label class="button-for-select">Select file
-                    <input type="file" name="file" id="file" /></td>
-                  </label>
-                </div> -->
-                                <div class="button-for-uploads" style="float: right !important;">
-                                    <button class="add-record-button rounded-add-record-button" type="submit" value="submit" disabled>Reset</button>
-                                    <button class="add-record-button rounded-add-record-button" type="submit" name="AppointmentClearanceUpdate">Submit</button>
+                                    <label>Selected file
+                                        <a href='../p/download.php?filename=<?php echo "$user[File]"; ?>'><?php echo "$user[File]"; ?></a>
+                                        <!-- <a href='../p/download1.php?filename=$user[File]'>unname</a> -->
+                                        <!-- <input type="file" name="file" id="file" /></td> -->
+                                    </label>
+                                </div>
+                                <!-- <div class="button-for-uploads" style="float: right !important;">
+                                    <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button>
+                                    <button class="add-record-button rounded-add-record-button" type="submit" name="RRMUpdate">Submit</button>
+                                </div> -->
+                            </div>
+                            <!-- ============================================================================================================================================ -->
+                            <div class="divider"></div>
+                            <div class="user-details-add-record">
+
+                                <div class="input-box-add-record">
+                                    <span class="add-record-details">Release By</span>
+                                    <input type="text" name="Release_By" value="<?php echo $fullname ?>" readonly>
                                 </div>
                             </div>
+                            <div class="user-details-add-record">
+                                <div class="input-box-add-record">
+                                    <span class="add-record-details">Received By</span>
+                                    <input type="text" name="Received_By" value="<?php echo $fullname ?>" readonly>
+                                </div>
+
+                            </div>
+                            <div class="user-details-add-record">
+                                <div class="input-box-add-record">
+                                    <span class="add-record-details">Client Position</span>
+                                    <input type="text" name="Client_Position" required>
+                                </div>
+
+                            </div>
+                            <div class="user-details-add-record">
+                                <div class="input-box-add-record">
+                                    <span class="add-record-details">Client Received Date</span>
+                                    <input type="date" name="Client_Received_Date" value="<?php echo Date('Y-m-d'); ?>">
+                                </div>
+
+                            </div>
+                            <div class="user-details-add-record">
+                                <label>Date : <?php echo Date('Y-m-d'); ?></label>
+
+                            </div>
+                            <div class="button-for-uploads" style="float: right !important;">
+                                <!-- <button class="add-record-button rounded-add-record-button" type="submit" value="submit">Reset</button> -->
+                                <button class="add-record-button rounded-add-record-button" type="submit" name="RRMUpdate">Submit</button>
+                            </div>
+
                         <?php } ?>
+
                     </form>
                 </div>
                 <!--END OF CONTAINER-->
             </section>
+
+
+
+
         </div>
-    </div>
-
-
-
-
-    <aside class="control-sidebar control-sidebar-dark">
-        <div>
-            Anything ADDED HERE
-        </div>
-    </aside>
 
     </div>
 
 
 
 
-    <footer class="main-footer">
 
-        <strong>Copyright &copy; 2014-2021
-            <a href="#">Cerberus</a>Capstone Psadasroject</strong> All rights reserved.
-    </footer>
+
+    </div>
+
+
+
+
 
 
 

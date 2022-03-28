@@ -61,30 +61,27 @@ if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-user"></i>
-                        Profile
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header"><?php echo $fullname; ?></span>
-                        <div class="dropdown-divider"></div>
-                        <a href="../p/profilepage.php" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Profile
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-user"></i>
+            Profile
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-header"><?php echo $fullname; ?></span>
+            <div class="dropdown-divider"></div>
+            <a href="../p/profilepage.php" class="dropdown-item">
+              <i class="fas fa-user mr-2"></i> Profile
 
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> Settings
+            </a>
 
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="../app/logout.php" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> Logout
+            <div class="dropdown-divider"></div>
+            <a href="../app/logout.php" class="dropdown-item">
+              <!-- <i class="fas fa-file mr-2"></i> -->
+              <i class="fas fa-sign-out-alt mr-2"> </i>Logout
 
-                        </a>
+            </a>
 
-                    </div>
-                </li>
+          </div>
+        </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -92,22 +89,22 @@ if ($_SESSION['Account_Type'] !== 'AdministrativeIssuance') {
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../index3.html" class="brand-link">
+            <div href="../index3.html" class="brand-link">
                 <img src="../dist/img/dcslogo.png" alt="Record Services Manila" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
                 <h6 class="brand-text font-weight-light h6">
                     Record Services Manila
                 </h6>
-            </a>
+            </div>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $fullname ?></a>
+                        <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
                     </div>
                 </div>
 

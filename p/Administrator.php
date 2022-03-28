@@ -105,7 +105,7 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="<?php $student->view1()?>" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
                         <a href="../p/profilepage.php" class="d-block"><?php echo $fullname ?></a>
@@ -130,15 +130,7 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-header">Administrator</li>
-                        <!-- <li class="nav-item">
-                            <a href="Administrator.php" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Add Accounts
 
-                                </p>
-                            </a>
-                        </li> -->
                         <li class="nav-item">
                             <a href="AccountList.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -148,45 +140,54 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                                 </p>
                             </a>
                         </li>
-
-
                         <li class="nav-item">
+                            <a href="#THISPLAYALLRECORDSANDDELETEEDITFILES" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    All Records
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
+
+
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Receiving, Routing And Mailing
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="AdministrativeIssuance.php" class="nav-link">
+                            <a href="AdministrativeIssuance_Records.php" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Administrative Issuance
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="CAVsection.php" class="nav-link">
+                      <li class="nav-item">
+                            <a href="CavRecords.php" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Certificate, Authentication and Verification
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                    Certificate, Authentication and Verification Records
+
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Appointment and Clearance and 201 Files
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tree"></i>
                                 <p>
@@ -208,17 +209,9 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
 
-                        <li class="nav-item">
-                            <a href="../widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Manage Queuing
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -250,6 +243,7 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
             <section class="content">
                 <!-- Default box -->
                 <div class="row">
+
                     <div class="card col-12">
                         <div class="card-body">
 
@@ -261,7 +255,7 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
 
                                 <form method="POST" action="Administrator.php">
                                     <div class="card">
-                                        <div class="row" style="background-color:#ffdd99">
+                                        <div class="row container-fluid ">
 
 
                                             <div class="col-8">
@@ -362,9 +356,9 @@ if ($_SESSION['Account_Type'] !== 'Admin') {
                                                 <button type="Submit" name="AddAccountSubmit" class="btn btn-primary">
                                                     Submit
                                                 </button>
-                                                <button type="ResetSubmit" class="btn btn-danger">
+                                                <!-- <button type="ResetSubmit" class="btn btn-danger">
                                                     Reset
-                                                </button>
+                                                </button> -->
                                             </div>
 
 
